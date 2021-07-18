@@ -1,5 +1,5 @@
 # PicoS2
-## A RPi Pico macro-keyboard project which uses a PS/2 keyboard's input to send keystrokes to the computer.
+## RPi Pico macro-keyboard project which uses a PS/2 keyboard's input to send keystrokes to the computer.
 
 ### IMPORTANT NOTES
 The software is currently in heavy development, which means:
