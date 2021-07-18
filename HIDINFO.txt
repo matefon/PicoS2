@@ -1,0 +1,6 @@
+The 'AHK Scripts' folder and the following files were added from AHK_keyboard-1.0.0 project on GitHub to make HID keyboard work:
+- control_leds.ahk (probably not needed for this project)
+- main_hid.c (formerly main.c in its own dir)
+- tusb_config.h
+- usb_descriptors.c (also referred in CMakeLists.txt)
+- usb_descriptors.h
