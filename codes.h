@@ -110,9 +110,17 @@ map<string,string> keycodes = {
     {"70","Num 0"},
     {"71","Num ."},
     {"E05A","Num Enter"},
+    {"FA","ACK"},
+    {"FE","Resend"},
+    {"EE","Echo"},
+    {"00","Key detection error or internal buffer overrun"},
+    {"FF","Key detection error or internal buffer overrun"},
+    {"AA","Self test passed (sent after FF (reset) or keyboard powerup)"},
+    {"FC","Self test failed (sent after FF (reset) or keyboard powerup)"},
+    {"FD","Self test failed (sent after FF (reset) or keyboard powerup)"},
     {"F0","rel"}, // release
     {"E0","spec"}, // special (e.g. arrow keys)
-    {"E0F0","spec_rel"} // releasing special key
+    {"E0F0","spec_rel"} // releasing special (extended )key
 };
 
 // binary to hex converter (custom made to convert 2x4 bits separately)
@@ -165,4 +173,40 @@ string getkey(int input[], bool spec){
 // search for keycode in map and return its name
     string output = keycodes.at(keycode);
     return output;
+}
+
+// hex to bin converter (custom made to convert digits separately)
+string hextobin(string input){
+    int len = input.length(); // get input length, then add input to a char array
+    string value[len];
+    string bin_string = "";
+    for (int i = 0; i < len; i++){
+        switch(input[i]){
+            case '0':value[i] = "0000";break;
+            case '1':value[i] = "0001";break;
+            case '2':value[i] = "0010";break;
+            case '3':value[i] = "0011";break;
+            case '4':value[i] = "0100";break;
+            case '5':value[i] = "0101";break;
+            case '6':value[i] = "0110";break;
+            case '7':value[i] = "0111";break;
+            case '8':value[i] = "1000";break;
+            case '9':value[i] = "1001";break;
+            case 'A':value[i] = "1010";break;
+            case 'B':value[i] = "1011";break;
+            case 'C':value[i] = "1100";break;
+            case 'D':value[i] = "1101";break;
+            case 'E':value[i] = "1110";break;
+            case 'F':value[i] = "1111";break;
+        }
+    }
+    for (int i = 0; i < len; i++){
+        bin_string += value[i];
+    }
+    len = bin_string.length();
+// swap characters starting from two corners
+    for (int i = 0; i < len / 2; i++){
+        swap(bin_string[i], bin_string[len - i - 1]);
+    }
+    return bin_string;
 }
