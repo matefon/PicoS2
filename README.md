@@ -11,3 +11,4 @@ Read HIDINFO.txt for information about which file is used for the HID support.
 Some info about PS/2 protocol: [hungarian](http://www.vfx.hu/info/atkeyboard.html), [english 1](https://www.avrfreaks.net/sites/default/files/PS2%20Keyboard.pdf), [english 2](https://karooza.net/how-to-interface-a-ps2-keyboard)
 
 **Also, this is my first C/C++ project, not just on the Pico, therefore I accept any help and suggestions.**
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z51YOFC)
