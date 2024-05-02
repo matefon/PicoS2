@@ -1,0 +1,13 @@
+# Target labels
+ ELF2UF2Build
+# Source files and their labels
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles/ELF2UF2Build
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles/ELF2UF2Build.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles/ELF2UF2Build-complete.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-build.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-configure.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-download.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-install.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-mkdir.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-patch.rule
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-update.rule

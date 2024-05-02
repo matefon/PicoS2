@@ -1,0 +1,3 @@
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm/CMakeFiles/pioasm.dir
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm/CMakeFiles/edit_cache.dir
+/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm/CMakeFiles/rebuild_cache.dir
