@@ -124,8 +124,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj"
   "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj.d"
-  "CMakeFiles/irq.dir/irq_gpt.cpp.obj"
-  "CMakeFiles/irq.dir/irq_gpt.cpp.obj.d"
+  "CMakeFiles/irq.dir/irq.cpp.obj"
+  "CMakeFiles/irq.dir/irq.cpp.obj.d"
   "irq.elf"
   "irq.pdb"
 )

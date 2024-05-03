@@ -12,15 +12,24 @@
 
 #include <iostream>
 #include <deque>
+#include <sstream>
+#include <iomanip>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "keycodes.h"
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-const uint CLK_PIN = 2;
-const uint DATA_PIN = 3;
+const uint CLK_PIN = 16;
+const uint DATA_PIN = 17;
 
 std::deque<int> data_bits;
+
+// Function to convert byte to hexadecimal string with leading zeros
+std::string byte_to_hex(unsigned char byte) {
+    std::ostringstream oss;
+    oss << std::uppercase << std::hex << std::setw(3) << std::setfill('0') << static_cast<int>(byte);
+    return oss.str();
+}
 
 void gpio_callback(uint gpio, uint32_t events) {
     static int bit_count = 0;
@@ -58,8 +67,9 @@ void gpio_callback(uint gpio, uint32_t events) {
                     received_byte |= (data_bits[i] << i);
                 }
 
-                // Print the received key
-                std::string hex_key = "F" + std::to_string(received_byte, std::hex);
+                // Print the received key              
+                std::string hex_key = "F" + byte_to_hex(received_byte);
+                std::cout << hex_key << std::endl;  
                 if (keycodes.find(hex_key) != keycodes.end()) {
                     std::cout << "Received key: " << keycodes[hex_key] << std::endl;
                 } else {
