@@ -1663,29 +1663,29 @@ home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/uniqu
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
 .PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
 
-irq.obj: irq.c.obj
-.PHONY : irq.obj
+irq_gpt.obj: irq_gpt.cpp.obj
+.PHONY : irq_gpt.obj
 
 # target to build an object file
-irq.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq.c.obj
-.PHONY : irq.c.obj
+irq_gpt.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq_gpt.cpp.obj
+.PHONY : irq_gpt.cpp.obj
 
-irq.i: irq.c.i
-.PHONY : irq.i
+irq_gpt.i: irq_gpt.cpp.i
+.PHONY : irq_gpt.i
 
 # target to preprocess a source file
-irq.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq.c.i
-.PHONY : irq.c.i
+irq_gpt.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq_gpt.cpp.i
+.PHONY : irq_gpt.cpp.i
 
-irq.s: irq.c.s
-.PHONY : irq.s
+irq_gpt.s: irq_gpt.cpp.s
+.PHONY : irq_gpt.s
 
 # target to generate assembly for a file
-irq.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq.c.s
-.PHONY : irq.c.s
+irq_gpt.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq_gpt.cpp.s
+.PHONY : irq_gpt.cpp.s
 
 # Help Target
 help:
@@ -1884,9 +1884,9 @@ help:
 	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj"
 	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i"
 	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s"
-	@echo "... irq.obj"
-	@echo "... irq.i"
-	@echo "... irq.s"
+	@echo "... irq_gpt.obj"
+	@echo "... irq_gpt.i"
+	@echo "... irq_gpt.s"
 .PHONY : help
 
 
