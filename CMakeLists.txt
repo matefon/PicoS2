@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
 add_executable(${PROJECT_NAME}
-        irq.c
+        irq_gpt.cpp
 )
 
 # create map/bin/hex file etc.

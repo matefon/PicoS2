@@ -1,40 +1,82 @@
-// TODO
-// 1. make a timer to reset data and counter every 0.1 secs, with irq priority 2
-// 2. set handler irq priority to 1
-// 3. mask the input
-// 4. check start, stop and parity
+/**
+ * \file irq.cpp
+ * The main code for reading input from PS/2
+ *
+ * \par Usage:
+ * 1. 
+ *
+ *
+ *
+ * made by matefon (assisted by ChatGPT)
+ */
 
 #include <iostream>
+#include <deque>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
+#include "keycodes.h"
 
-static char event_str[128];
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 2;
 const uint DATA_PIN = 3;
-unsigned int DATA = 0x00;
-int d;
-//int DATA_PARITY_MASK = 0x00;
-unsigned DATA_MASK = 0x1ef;
-int count = 0;
 
-void gpio_event_string(char *buf, uint32_t events);
+std::deque<int> data_bits;
 
 void gpio_callback(uint gpio, uint32_t events) {
-    gpio_event_string(event_str, events);
-    d = gpio_get(DATA_PIN) == true ? 1 : 0;
-    DATA = (DATA << 1) | (d << 0);
-    std::cout << count++ << ":GPIO " << gpio << ": [" << d << "]" << event_str << std::endl;
-    gpio_put(LED_PIN, gpio_get(DATA_PIN));
-    if (count == 12){
-        std::cout << std::endl << "[" << DATA << "] received" << std::endl;
-    	count = 0;
-    	DATA = 0x00;
+    static int bit_count = 0;
+    static unsigned char received_byte = 0;
+
+    if (gpio == CLK_PIN && events & GPIO_IRQ_EDGE_FALL) {
+        int data_bit = gpio_get(DATA_PIN);
+        
+        // Check for start bit
+        if (bit_count == 0 && data_bit == 0) {
+            bit_count = 1;
+            received_byte = 0;
+            data_bits.clear();
+            return;
+        }
+
+        // Store data bits
+        if (bit_count >= 1 && bit_count <= 8) {
+            data_bits.push_back(data_bit);
+            bit_count++;
+            return;
+        }
+
+        // Store parity bit
+        if (bit_count == 9) {
+            bit_count++;
+            return;
+        }
+
+        // Store stop bit
+        if (bit_count == 10 && data_bit == 1) {
+            // Combine the received bits to form a byte
+            if (data_bits.size() == 8) {
+                for (int i = 0; i < 8; ++i) {
+                    received_byte |= (data_bits[i] << i);
+                }
+
+                // Print the received key
+                std::string hex_key = "F" + std::to_string(received_byte, std::hex);
+                if (keycodes.find(hex_key) != keycodes.end()) {
+                    std::cout << "Received key: " << keycodes[hex_key] << std::endl;
+                } else {
+                    std::cout << "Unknown key" << std::endl;
+                }
+            } else {
+                std::cout << "Invalid byte received" << std::endl;
+            }
+
+            // Reset bit count for the next byte
+            bit_count = 0;
+            return;
+        }
     }
-    //printf("GPIO %d %x\n", gpio, DATA);
 }
 
-int main(void) {
+int main() {
     stdio_init_all();
     
     gpio_init(LED_PIN);
@@ -43,44 +85,15 @@ int main(void) {
     gpio_init(DATA_PIN);
     gpio_set_dir(DATA_PIN, GPIO_IN);
 
-    gpio_init(15);
-    gpio_set_dir(15, GPIO_OUT); 
+    gpio_init(CLK_PIN);
+    gpio_set_dir(CLK_PIN, GPIO_IN);
     
-    gpio_put(15, 1);
+    gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
     sleep_ms(2000);
     std::cout << "Hello GPIO IRQ" << std::endl;
-    gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, &gpio_callback);
+    gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
     // Wait forever
     while (1);
-}
-
-
-static const char *gpio_irq_str[] = {
-        "LEVEL_LOW",  // 0x1
-        "LEVEL_HIGH", // 0x2
-        "EDGE_FALL",  // 0x4
-        "EDGE_RISE"   // 0x8
-};
-
-void gpio_event_string(char *buf, uint32_t events) {
-    for (uint i = 0; i < 4; i++) {
-        uint mask = (1 << i);
-        if (events & mask) {
-            // Copy this event string into the user string
-            const char *event_str = gpio_irq_str[i];
-            while (*event_str != '\0') {
-                *buf++ = *event_str++;
-            }
-            events &= ~mask;
-
-            // If more events add ", "
-            if (events) {
-                *buf++ = ',';
-                *buf++ = ' ';
-            }
-        }
-    }
-    *buf++ = '\0';
 }
