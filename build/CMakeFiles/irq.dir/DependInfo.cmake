@@ -24,6 +24,7 @@ set(CMAKE_ASM_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_ASM
+  "CFG_TUSB_DEBUG=0"
   "CFG_TUSB_MCU=OPT_MCU_RP2040"
   "CFG_TUSB_OS=OPT_OS_PICO"
   "LIB_PICO_BIT_OPS=1"
@@ -70,6 +71,7 @@ set(CMAKE_TARGET_DEFINITIONS_ASM
 
 # The include file search paths:
 set(CMAKE_ASM_TARGET_INCLUDE_PATH
+  "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_stdlib/include"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_gpio/include"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include"
@@ -112,13 +114,12 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_mem_ops/include"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/boot_stage2/include"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src"
-  "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common"
-  "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include"
   )
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj.d"
@@ -175,10 +176,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj.d"
-  "/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/usb_descriptors.c" "CMakeFiles/irq.dir/usb_descriptors.c.obj" "gcc" "CMakeFiles/irq.dir/usb_descriptors.c.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
   "/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/irq.cpp" "CMakeFiles/irq.dir/irq.cpp.obj" "gcc" "CMakeFiles/irq.dir/irq.cpp.obj.d"
-  "/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/usb_keyboard.cpp" "CMakeFiles/irq.dir/usb_keyboard.cpp.obj" "gcc" "CMakeFiles/irq.dir/usb_keyboard.cpp.obj.d"
   )
 
 # Targets to which this target links.

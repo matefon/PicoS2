@@ -19,13 +19,16 @@
 #include "hardware/gpio.h"
 #include "keycodes.h"
 
-#include "usb_keyboard.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include "board.h"
+#include "tinyusb/hw/bsp/board_api.h"
+#include "tinyusb/hw/bsp/rp2040/board.h"
+#include "tinyusb/src/tusb.h"
+#include "tinyusb/src/class/hid/hid_device.h"
 #include "tusb_config.h"
+#include "usb_descriptors.h"
 
-const uint LED_PIN = PICO_DEFAULT_LED_PIN;
+#define BOARD_TUD_RHPORT 0
+
+//const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
 const uint DATA_PIN = 17;
 
@@ -157,9 +160,12 @@ int main() {
     stdio_init_all();
 
     board_init();
-// init device stack on configured roothub port
+    // init device stack on configured roothub port
     tud_init(BOARD_TUD_RHPORT);
-    
+    if (board_init_after_tusb) {
+        board_init_after_tusb();
+    }
+
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);    
     
@@ -178,13 +184,13 @@ int main() {
 
     // Wait forever
     while (1) {
-
         tud_task(); // tinyusb device task
-        led_blinking_task();
-
         if (!keyboard.empty()) {
             std::cout << keyboard << std::endl;
         }
+        uint8_t keycode[6] = { 0 };
+        keycode[0] = HID_KEY_A;
+        tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
         sleep_ms(100);
     }
 }

@@ -35,7 +35,8 @@ CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/
  /usr/include/newlib/machine/stdlib.h /usr/include/newlib/alloca.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
- /usr/include/newlib/string.h /usr/include/newlib/sys/_locale.h \
+ /usr/include/newlib/inttypes.h /usr/include/newlib/sys/_intsup.h \
+ /usr/include/newlib/sys/_locale.h /usr/include/newlib/string.h \
  /usr/include/newlib/strings.h /usr/include/newlib/sys/string.h \
  /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
@@ -50,7 +51,6 @@ CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
- /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/usb.h \

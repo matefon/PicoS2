@@ -207,6 +207,30 @@ cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build
 .PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast
 
+home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj: home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+.PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj
+
+# target to build an object file
+home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+.PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+
+home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i: home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+.PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i
+
+# target to preprocess a source file
+home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+.PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.i
+
+home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s: home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+.PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s
+
+# target to generate assembly for a file
+home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+.PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.s
+
 home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj: home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
 .PHONY : home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj
 
@@ -1687,54 +1711,6 @@ irq.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq.cpp.s
 .PHONY : irq.cpp.s
 
-usb_descriptors.obj: usb_descriptors.c.obj
-.PHONY : usb_descriptors.obj
-
-# target to build an object file
-usb_descriptors.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_descriptors.c.obj
-.PHONY : usb_descriptors.c.obj
-
-usb_descriptors.i: usb_descriptors.c.i
-.PHONY : usb_descriptors.i
-
-# target to preprocess a source file
-usb_descriptors.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_descriptors.c.i
-.PHONY : usb_descriptors.c.i
-
-usb_descriptors.s: usb_descriptors.c.s
-.PHONY : usb_descriptors.s
-
-# target to generate assembly for a file
-usb_descriptors.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_descriptors.c.s
-.PHONY : usb_descriptors.c.s
-
-usb_keyboard.obj: usb_keyboard.cpp.obj
-.PHONY : usb_keyboard.obj
-
-# target to build an object file
-usb_keyboard.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_keyboard.cpp.obj
-.PHONY : usb_keyboard.cpp.obj
-
-usb_keyboard.i: usb_keyboard.cpp.i
-.PHONY : usb_keyboard.i
-
-# target to preprocess a source file
-usb_keyboard.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_keyboard.cpp.i
-.PHONY : usb_keyboard.cpp.i
-
-usb_keyboard.s: usb_keyboard.cpp.s
-.PHONY : usb_keyboard.s
-
-# target to generate assembly for a file
-usb_keyboard.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_keyboard.cpp.s
-.PHONY : usb_keyboard.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1750,6 +1726,9 @@ help:
 	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
 	@echo "... bs2_default"
 	@echo "... irq"
+	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.obj"
+	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.i"
+	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.s"
 	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj"
 	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i"
 	@echo "... home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s"
@@ -1935,12 +1914,6 @@ help:
 	@echo "... irq.obj"
 	@echo "... irq.i"
 	@echo "... irq.s"
-	@echo "... usb_descriptors.obj"
-	@echo "... usb_descriptors.i"
-	@echo "... usb_descriptors.s"
-	@echo "... usb_keyboard.obj"
-	@echo "... usb_keyboard.i"
-	@echo "... usb_keyboard.s"
 .PHONY : help
 
 

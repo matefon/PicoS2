@@ -31,10 +31,11 @@ CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/device/dcd.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
- /usr/include/newlib/string.h /usr/include/newlib/sys/reent.h \
- /usr/include/newlib/_ansi.h /usr/include/newlib/sys/_types.h \
- /usr/include/newlib/machine/_types.h /usr/include/newlib/sys/lock.h \
- /usr/include/newlib/sys/_locale.h /usr/include/newlib/strings.h \
+ /usr/include/newlib/inttypes.h /usr/include/newlib/sys/_intsup.h \
+ /usr/include/newlib/sys/_locale.h /usr/include/newlib/string.h \
+ /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
+ /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
+ /usr/include/newlib/sys/lock.h /usr/include/newlib/strings.h \
  /usr/include/newlib/sys/string.h /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/sys/types.h /usr/include/newlib/sys/_stdint.h \
@@ -48,7 +49,6 @@ CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
- /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
@@ -66,7 +66,6 @@ CMakeFiles/irq.dir/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
- /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
