@@ -2895,6 +2895,17 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
   /usr/include/newlib/c++/10.3.1/bits/stl_uninitialized.h \
   /usr/include/newlib/c++/10.3.1/bits/stl_deque.h \
   /usr/include/newlib/c++/10.3.1/bits/deque.tcc \
+  /usr/include/newlib/c++/10.3.1/set \
+  /usr/include/newlib/c++/10.3.1/bits/stl_tree.h \
+  /usr/include/newlib/c++/10.3.1/ext/aligned_buffer.h \
+  /usr/include/newlib/c++/10.3.1/bits/node_handle.h \
+  /usr/include/newlib/c++/10.3.1/optional \
+  /usr/include/newlib/c++/10.3.1/utility \
+  /usr/include/newlib/c++/10.3.1/bits/stl_relops.h \
+  /usr/include/newlib/c++/10.3.1/bits/enable_special_members.h \
+  /usr/include/newlib/c++/10.3.1/bits/stl_set.h \
+  /usr/include/newlib/c++/10.3.1/bits/stl_multiset.h \
+  /usr/include/newlib/c++/10.3.1/bits/erase_if.h \
   /usr/include/newlib/c++/10.3.1/sstream \
   /usr/include/newlib/c++/10.3.1/bits/sstream.tcc \
   /usr/include/newlib/c++/10.3.1/iomanip \
@@ -2909,8 +2920,6 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
   /usr/include/newlib/c++/10.3.1/bits/locale_facets_nonio.tcc \
   /usr/include/newlib/c++/10.3.1/bits/locale_conv.h \
   /usr/include/newlib/c++/10.3.1/bits/unique_ptr.h \
-  /usr/include/newlib/c++/10.3.1/utility \
-  /usr/include/newlib/c++/10.3.1/bits/stl_relops.h \
   /usr/include/newlib/c++/10.3.1/tuple \
   /usr/include/newlib/c++/10.3.1/array \
   /usr/include/newlib/c++/10.3.1/bits/uses_allocator.h \
@@ -2957,22 +2966,147 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
   /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
   ../keycodes.h \
   /usr/include/newlib/c++/10.3.1/unordered_map \
-  /usr/include/newlib/c++/10.3.1/ext/aligned_buffer.h \
   /usr/include/newlib/c++/10.3.1/bits/hashtable.h \
   /usr/include/newlib/c++/10.3.1/bits/hashtable_policy.h \
   /usr/include/newlib/c++/10.3.1/limits \
-  /usr/include/newlib/c++/10.3.1/bits/node_handle.h \
-  /usr/include/newlib/c++/10.3.1/optional \
-  /usr/include/newlib/c++/10.3.1/bits/enable_special_members.h \
   /usr/include/newlib/c++/10.3.1/bits/unordered_map.h \
-  /usr/include/newlib/c++/10.3.1/bits/erase_if.h
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /usr/include/newlib/string.h \
+  /usr/include/newlib/strings.h \
+  /usr/include/newlib/sys/string.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
+  ../usb_descriptors.h \
+  ../usb_keyboard.h
+
+CMakeFiles/irq.dir/usb_keyboard.cpp.obj: ../usb_keyboard.cpp \
+  /usr/include/newlib/c++/10.3.1/stdlib.h \
+  /usr/include/newlib/c++/10.3.1/cstdlib \
+  /usr/include/newlib/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/c++config.h \
+  /usr/include/newlib/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/os_defines.h \
+  /usr/include/newlib/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/cpu_defines.h \
+  /usr/include/newlib/c++/10.3.1/pstl/pstl_config.h \
+  /usr/include/newlib/stdlib.h \
+  /usr/include/newlib/machine/ieeefp.h \
+  /usr/include/newlib/_ansi.h \
+  /usr/include/newlib/newlib.h \
+  /usr/include/newlib/_newlib_version.h \
+  /usr/include/newlib/sys/config.h \
+  /usr/include/newlib/sys/features.h \
+  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+  /usr/include/newlib/sys/reent.h \
+  /usr/include/newlib/_ansi.h \
+  /usr/include/newlib/sys/_types.h \
+  /usr/include/newlib/machine/_types.h \
+  /usr/include/newlib/machine/_default_types.h \
+  /usr/include/newlib/sys/lock.h \
+  /usr/include/newlib/sys/cdefs.h \
+  /usr/include/newlib/machine/stdlib.h \
+  /usr/include/newlib/alloca.h \
+  /usr/include/newlib/c++/10.3.1/bits/std_abs.h \
+  /usr/include/newlib/stdio.h \
+  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
+  /usr/include/newlib/sys/types.h \
+  /usr/include/newlib/sys/_stdint.h \
+  /usr/include/newlib/machine/endian.h \
+  /usr/include/newlib/machine/_endian.h \
+  /usr/include/newlib/sys/select.h \
+  /usr/include/newlib/sys/_sigset.h \
+  /usr/include/newlib/sys/_timeval.h \
+  /usr/include/newlib/sys/timespec.h \
+  /usr/include/newlib/sys/_timespec.h \
+  /usr/include/newlib/sys/_pthreadtypes.h \
+  /usr/include/newlib/sys/sched.h \
+  /usr/include/newlib/machine/types.h \
+  /usr/include/newlib/sys/stdio.h \
+  /usr/include/newlib/string.h \
+  /usr/include/newlib/sys/_locale.h \
+  /usr/include/newlib/strings.h \
+  /usr/include/newlib/sys/string.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h \
+  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
+  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/tusb.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/tusb_option.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/tusb_config.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio_usb/include/pico/stdio_usb.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include/pico.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
+  /usr/include/newlib/c++/10.3.1/cassert \
+  /usr/include/newlib/assert.h \
+  generated/pico_base/pico/version.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
+  generated/pico_base/pico/config_autogen.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/boards/include/boards/pico.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/addressmap.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/sio.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_base/include/pico/error.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_mcu.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_compiler.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_verify.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_types.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_debug.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_timeout.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_common.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal_pico.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_time/include/pico/time.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/timer.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_base/include/hardware/address_mapped.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/timer.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/sem.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/lock_core.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/mutex.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_sync/include/pico/critical_section.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/osal/osal.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/hid/hid.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/device/usbd.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.h \
+  /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc.h \
+  ../usb_descriptors.h \
+  ../usb_keyboard.h
 
 
 /usr/include/newlib/c++/10.3.1/bits/unordered_map.h:
-
-/usr/include/newlib/c++/10.3.1/optional:
-
-/usr/include/newlib/c++/10.3.1/bits/node_handle.h:
 
 /usr/include/newlib/c++/10.3.1/limits:
 
@@ -2986,10 +3120,6 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 
 /usr/include/newlib/c++/10.3.1/tuple:
 
-/usr/include/newlib/c++/10.3.1/bits/stl_relops.h:
-
-/usr/include/newlib/c++/10.3.1/utility:
-
 /usr/include/newlib/c++/10.3.1/bits/locale_facets_nonio.tcc:
 
 /usr/include/newlib/c++/10.3.1/bits/codecvt.h:
@@ -2999,6 +3129,14 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 /usr/include/newlib/c++/10.3.1/locale:
 
 /usr/include/newlib/c++/10.3.1/bits/sstream.tcc:
+
+/usr/include/newlib/c++/10.3.1/bits/stl_relops.h:
+
+/usr/include/newlib/c++/10.3.1/utility:
+
+/usr/include/newlib/c++/10.3.1/optional:
+
+/usr/include/newlib/c++/10.3.1/bits/node_handle.h:
 
 /usr/include/newlib/c++/10.3.1/bits/deque.tcc:
 
@@ -3066,6 +3204,8 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 
 /usr/include/newlib/c++/10.3.1/bits/cxxabi_forced.h:
 
+/usr/include/newlib/c++/10.3.1/set:
+
 /usr/include/newlib/c++/10.3.1/ext/new_allocator.h:
 
 /usr/include/newlib/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/c++allocator.h:
@@ -3075,6 +3215,8 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 /usr/include/newlib/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/atomic_word.h:
 
 /usr/include/newlib/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp/bits/gthr-default.h:
+
+/usr/include/newlib/c++/10.3.1/bits/stl_set.h:
 
 /usr/include/newlib/c++/10.3.1/ext/atomicity.h:
 
@@ -3093,6 +3235,8 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 /usr/include/newlib/c++/10.3.1/bits/stl_iterator_base_funcs.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_util/include/pico/util/datetime.h:
+
+/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/ansi_escape.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/platform_defs.h:
 
@@ -3123,6 +3267,8 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/hardware_irq/include/hardware/irq.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/usb.h:
+
+../usb_keyboard.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h:
 
@@ -3270,6 +3416,8 @@ CMakeFiles/irq.dir/irq.cpp.obj: ../irq.cpp \
 
 /usr/include/newlib/sys/features.h:
 
+../usb_descriptors.h:
+
 /usr/include/newlib/c++/10.3.1/bits/exception_ptr.h:
 
 /usr/include/newlib/c++/10.3.1/initializer_list:
@@ -3376,6 +3524,8 @@ generated/pico_base/pico/config_autogen.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_stdio/include/pico/stdio.h:
 
+../usb_keyboard.cpp:
+
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/dreq.h:
 
 /usr/include/newlib/c++/10.3.1/bits/cxxabi_init_exception.h:
@@ -3405,6 +3555,8 @@ generated/pico_base/pico/config_autogen.h:
 /usr/include/newlib/c++/10.3.1/bits/stl_iterator.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/boot_stage2/include/boot_stage2/config.h:
+
+/usr/include/newlib/c++/10.3.1/bits/stl_multiset.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h:
 
@@ -3626,6 +3778,8 @@ generated/pico_base/pico/config_autogen.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/mpu.h:
 
+/home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/lib/tinyusb/hw/bsp/board.h:
+
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info.h:
 
 /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/common/pico_binary_info/include/pico/binary_info/defs.h:
@@ -3681,5 +3835,7 @@ generated/pico_base/pico/config_autogen.h:
 /usr/include/newlib/c++/10.3.1/type_traits:
 
 /usr/include/newlib/c++/10.3.1/bits/char_traits.h:
+
+/usr/include/newlib/c++/10.3.1/bits/stl_tree.h:
 
 /usr/include/newlib/c++/10.3.1/bits/cpp_type_traits.h:

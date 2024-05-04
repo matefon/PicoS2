@@ -12,24 +12,89 @@
 
 #include <iostream>
 #include <deque>
+#include <set>
 #include <sstream>
 #include <iomanip>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "keycodes.h"
 
+#include "bsp/board.h"
+#include "tusb.h"
+#include "usb_descriptors.h"
+#include "usb_keyboard.h"
+
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
 const uint DATA_PIN = 17;
 
-std::deque<int> data_bits;
+class Keyboard {
+private:
+    std::set<std::string> keys;
+    bool rel;
+    bool ext;
+public:
+    Keyboard() : rel(false), ext(false) {keys.clear();}
+
+    // Return value? It should return if insertion is successful, but insert() returns std::pair.
+    void press(std::string hex_key) {
+        #ifdef DEBUG
+            std::cout << hex_key << std::endl;
+        #endif
+        if (hex_key == "F0") { // if release code is received, the next key should be removed
+            rel = true;
+        } else if (hex_key == "E0") {
+            ext = true;
+        } else {
+            if (ext) {
+                hex_key = "E0" + hex_key;
+                ext = false;
+            }
+            std::string key = keycodes[hex_key];
+            if (rel) { // remove key
+                release(key);
+                rel = false;
+            } else {
+                keys.insert(key); // if no release code received, add key
+            }
+        }
+    } 
+
+    int release(std::string key) {return keys.erase(key);}
+
+    bool empty() {return keys.empty();}
+
+    void list() const {
+        for (auto it = keys.begin(); it != keys.end(); ++it) {
+            std::cout << *it << std::endl;
+        }
+    }
+
+    std::set<std::string> getkeys() const {return keys;}
+
+    friend std::ostream& operator<<(std::ostream& os, const Keyboard& k);
+
+    ~Keyboard() {}
+
+};
+
+std::ostream& operator<<(std::ostream& os, const Keyboard& k) {
+    std::set<std::string> temp = k.getkeys();
+    for (auto it = temp.begin(); it != temp.end(); ++it) {
+            os << *it << ", ";
+    }
+    return os;
+}
 
 // Function to convert byte to hexadecimal string with leading zeros
 std::string byte_to_hex(unsigned char byte) {
     std::ostringstream oss;
-    oss << std::uppercase << std::hex << std::setw(3) << std::setfill('0') << static_cast<int>(byte);
+    oss << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
     return oss.str();
 }
+
+std::deque<int> data_bits;
+Keyboard keyboard;
 
 void gpio_callback(uint gpio, uint32_t events) {
     static int bit_count = 0;
@@ -68,10 +133,11 @@ void gpio_callback(uint gpio, uint32_t events) {
                 }
 
                 // Print the received key              
-                std::string hex_key = "F" + byte_to_hex(received_byte);
-                std::cout << hex_key << std::endl;  
+                std::string hex_key = byte_to_hex(received_byte);
+                //std::cout << hex_key << std::endl;  
                 if (keycodes.find(hex_key) != keycodes.end()) {
-                    std::cout << "Received key: " << keycodes[hex_key] << std::endl;
+                    //std::cout << "Received key: " << keycodes[hex_key] << std::endl;
+                    keyboard.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
                 }
@@ -89,6 +155,9 @@ void gpio_callback(uint gpio, uint32_t events) {
 int main() {
     stdio_init_all();
     
+    board_init();
+    tusb_init();
+    
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);    
     
@@ -102,8 +171,19 @@ int main() {
     
     sleep_ms(2000);
     std::cout << "Hello GPIO IRQ" << std::endl;
+
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
     // Wait forever
-    while (1);
+    while (1) {
+
+        tud_task(); // tinyusb device task
+        led_blinking_task();
+        hid_task();
+
+        if (!keyboard.empty()) {
+            std::cout << keyboard << std::endl;
+        }
+        sleep_ms(100);
+    }
 }

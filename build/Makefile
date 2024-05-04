@@ -1687,6 +1687,54 @@ irq.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/irq.cpp.s
 .PHONY : irq.cpp.s
 
+usb_descriptors.obj: usb_descriptors.c.obj
+.PHONY : usb_descriptors.obj
+
+# target to build an object file
+usb_descriptors.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_descriptors.c.obj
+.PHONY : usb_descriptors.c.obj
+
+usb_descriptors.i: usb_descriptors.c.i
+.PHONY : usb_descriptors.i
+
+# target to preprocess a source file
+usb_descriptors.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_descriptors.c.i
+.PHONY : usb_descriptors.c.i
+
+usb_descriptors.s: usb_descriptors.c.s
+.PHONY : usb_descriptors.s
+
+# target to generate assembly for a file
+usb_descriptors.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_descriptors.c.s
+.PHONY : usb_descriptors.c.s
+
+usb_keyboard.obj: usb_keyboard.cpp.obj
+.PHONY : usb_keyboard.obj
+
+# target to build an object file
+usb_keyboard.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_keyboard.cpp.obj
+.PHONY : usb_keyboard.cpp.obj
+
+usb_keyboard.i: usb_keyboard.cpp.i
+.PHONY : usb_keyboard.i
+
+# target to preprocess a source file
+usb_keyboard.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_keyboard.cpp.i
+.PHONY : usb_keyboard.cpp.i
+
+usb_keyboard.s: usb_keyboard.cpp.s
+.PHONY : usb_keyboard.s
+
+# target to generate assembly for a file
+usb_keyboard.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/irq.dir/build.make CMakeFiles/irq.dir/usb_keyboard.cpp.s
+.PHONY : usb_keyboard.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1887,6 +1935,12 @@ help:
 	@echo "... irq.obj"
 	@echo "... irq.i"
 	@echo "... irq.s"
+	@echo "... usb_descriptors.obj"
+	@echo "... usb_descriptors.i"
+	@echo "... usb_descriptors.s"
+	@echo "... usb_keyboard.obj"
+	@echo "... usb_keyboard.i"
+	@echo "... usb_keyboard.s"
 .PHONY : help
 
 
