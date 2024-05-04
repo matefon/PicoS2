@@ -19,11 +19,6 @@
 #include "hardware/gpio.h"
 #include "keycodes.h"
 
-#include "bsp/board.h"
-#include "tusb.h"
-#include "usb_descriptors.h"
-#include "usb_keyboard.h"
-
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
 const uint DATA_PIN = 17;
@@ -155,9 +150,6 @@ void gpio_callback(uint gpio, uint32_t events) {
 int main() {
     stdio_init_all();
     
-    board_init();
-    tusb_init();
-    
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);    
     
@@ -176,11 +168,6 @@ int main() {
 
     // Wait forever
     while (1) {
-
-        tud_task(); // tinyusb device task
-        led_blinking_task();
-        hid_task();
-
         if (!keyboard.empty()) {
             std::cout << keyboard << std::endl;
         }
