@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
-include($ENV{PICO_SDK_PATH}/lib/tinyusb/hw/bsp/family_support.cmake)
 
 project(irq C CXX ASM)
 
@@ -10,21 +9,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-#add_executable(${PROJECT_NAME}
-#        irq.cpp
-#        tinyusb/src/tusb.c
-#)
-
-add_executable(${PROJECT_NAME})
-
-target_sources(${PROJECT_NAME} PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/irq.cpp
-        #$ENV{PICO_SDK_PATH}/lib/tinyusb/src/tusb.c
-        $ENV{PICO_SDK_PATH}/lib/tinyusb/hw/bsp/rp2040/family.c
-        )
-target_include_directories(${PROJECT_NAME} PUBLIC
-        $ENV{PICO_SDK_PATH}/lib/
-)       
+add_executable(${PROJECT_NAME}
+        irq.cpp
+)   
 
 
 # create map/bin/hex file etc.
