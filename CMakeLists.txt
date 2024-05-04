@@ -11,8 +11,6 @@ pico_sdk_init()
 
 add_executable(${PROJECT_NAME}
         irq.cpp
-        usb_keyboard.cpp
-        usb_descriptors.c
 )
 
 # create map/bin/hex file etc.
