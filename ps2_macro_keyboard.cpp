@@ -70,10 +70,12 @@ public:
 
     bool empty() {return keys.empty();}
 
-    void list() const {
+    std::string list() const {
+        std::string keys_string;
         for (auto it = keys.begin(); it != keys.end(); ++it) {
-            std::cout << *it << std::endl;
+            keys_string += *it;
         }
+        return keys_string;
     }
 
     std::set<std::string> getkeys() const {return keys;}
@@ -100,7 +102,7 @@ std::string byte_to_hex(unsigned char byte) {
 }
 
 std::deque<int> data_bits;
-PS2 keyboard;
+PS2 ps2;
 
 void gpio_callback(uint gpio, uint32_t events) {
     static int bit_count = 0;
@@ -145,7 +147,7 @@ void gpio_callback(uint gpio, uint32_t events) {
                 #endif
                 if (keycodes.find(hex_key) != keycodes.end()) {
                     //std::cout << "Received key: " << keycodes[hex_key] << std::endl;
-                    keyboard.press(hex_key);
+                    ps2.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
                 }
@@ -213,12 +215,10 @@ int main() {
 
     // Wait forever
     while (1) {
-        if (!keyboard.empty()) {
-            std::cout << keyboard << std::endl;
-            Keyboard.press(KEY_LEFT_GUI);
-            KEY_A
-            sleep_ms(5);
-            Keyboard.release(KEY_LEFT_GUI);
+        if (!ps2.empty()) {
+            std::cout << ps2 << std::endl;
+            //Keyboard.write('a');
+            Keyboard.print(ps2.list());
         }
         sleep_ms(100);
     }
