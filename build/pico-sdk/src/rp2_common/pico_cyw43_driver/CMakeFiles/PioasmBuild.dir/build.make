@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vinke/Documents/Pi_Pico/c/pico/projects/irq
+CMAKE_SOURCE_DIR = /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build
+CMAKE_BINARY_DIR = /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build
 
 # Utility rule file for PioasmBuild.
 
@@ -76,52 +76,52 @@ pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete: pico-
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-build
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-install
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-done
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Completed 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-done
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-build: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Performing build step for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm && $(MAKE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Performing build step for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm && $(MAKE)
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cfgcmd.txt
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cache-Release.cmake
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Performing configure step for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm && /usr/bin/cmake -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake "-GUnix Makefiles" -C/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cache-Release.cmake /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/tools/pioasm
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Performing configure step for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm && /usr/bin/cmake -DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake "-GUnix Makefiles" -C/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cache-Release.cmake /home/vinke/Documents/Pi_Pico/pico-sdk/tools/pioasm
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "No download step for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E echo_append
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "No download step for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E echo_append
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-install: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No install step for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm && /usr/bin/cmake -E echo_append
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-install
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "No install step for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm && /usr/bin/cmake -E echo_append
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-install
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/tools/pioasm
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Creating directories for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/pico-sdk/tools/pioasm
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E make_directory /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E echo_append
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "No patch step for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E echo_append
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update: pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No update step for 'PioasmBuild'"
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E echo_append
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "No update step for 'PioasmBuild'"
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E echo_append
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && /usr/bin/cmake -E touch /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update
 
 PioasmBuild: pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild
 PioasmBuild: pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild-complete
@@ -140,10 +140,10 @@ pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build: Pioa
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/clean:
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver && $(CMAKE_COMMAND) -P CMakeFiles/PioasmBuild.dir/cmake_clean.cmake
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver && $(CMAKE_COMMAND) -P CMakeFiles/PioasmBuild.dir/cmake_clean.cmake
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/clean
 
 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/depend:
-	cd /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vinke/Documents/Pi_Pico/c/pico/projects/irq /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_cyw43_driver /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/pico_cyw43_driver /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/depend
 

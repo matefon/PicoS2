@@ -1,4 +1,4 @@
-# Install script for directory: /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2_common/pico_mem_ops
+# Install script for directory: /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/pico_mem_ops
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

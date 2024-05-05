@@ -1,4 +1,4 @@
-# Install script for directory: /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/tools/pioasm
+# Install script for directory: /home/vinke/Documents/Pi_Pico/pico-sdk/tools/pioasm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pioasm/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

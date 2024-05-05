@@ -1,4 +1,4 @@
-// Padded and checksummed version of: /home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
+// Padded and checksummed version of: /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
 
 .cpu cortex-m0plus
 .thumb

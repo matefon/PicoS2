@@ -1,5 +1,5 @@
 CMakeFiles/pioasm.dir/pio_disassembler.cpp.o: \
- /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/tools/pioasm/pio_disassembler.cpp \
+ /home/vinke/Documents/Pi_Pico/pico-sdk/tools/pioasm/pio_disassembler.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/array \
  /usr/include/c++/11/utility \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -155,4 +155,4 @@ CMakeFiles/pioasm.dir/pio_disassembler.cpp.o: \
  /usr/include/c++/11/bits/unique_ptr.h /usr/include/c++/11/tuple \
  /usr/include/c++/11/bits/uses_allocator.h \
  /usr/include/c++/11/bits/invoke.h \
- /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/tools/pioasm/pio_disassembler.h
+ /home/vinke/Documents/Pi_Pico/pico-sdk/tools/pioasm/pio_disassembler.h

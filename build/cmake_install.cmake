@@ -1,4 +1,4 @@
-# Install script for directory: /home/vinke/Documents/Pi_Pico/c/pico/projects/irq
+# Install script for directory: /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/pico-sdk/cmake_install.cmake")
+  include("/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/vinke/Documents/Pi_Pico/c/pico/projects/irq/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

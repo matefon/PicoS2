@@ -1,4 +1,4 @@
-# Install script for directory: /home/vinke/Documents/Pi_Pico/c/pico/pico-sdk/src/rp2040/hardware_structs
+# Install script for directory: /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_structs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
