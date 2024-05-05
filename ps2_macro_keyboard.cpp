@@ -20,6 +20,7 @@
 #include "hardware/gpio.h"
 // for keycodes
 #include "keycodes.h"
+#include "usb_codes.h"
 // for USB HID
 #include "pico/binary_info.h"
 #include "includes/usb.h"
@@ -30,6 +31,8 @@
 //#define DEBUG
 #define DISPLAY
 #define PRINT
+
+//#define INFOKEY "F1"
 
 #ifdef DISPLAY
 // for OLED 128x32 display
@@ -253,14 +256,21 @@ int main() {
                 std::cout << ps2 << std::endl;
             #endif
             //Keyboard.write('a');
-
+            
             Keyboard.print(ps2.list());
+
             #ifdef DISPLAY
                 display.clear();
                 pico_ssd1306::drawText(&display, font_12x16, ps2.list().c_str(), 0 ,0);
                 display.sendBuffer();
             #endif
-        }
+        } 
+        #ifdef DISPLAY
+            else {
+                display.clear();
+                display.sendBuffer();
+            }
+        #endif
         sleep_ms(100);
     }
 }
