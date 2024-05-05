@@ -256,8 +256,17 @@ int main() {
                 std::cout << ps2 << std::endl;
             #endif
             //Keyboard.write('a');
-            
-            Keyboard.print(ps2.list());
+            std::string keylist = ps2.list();
+            if (keylist == "F1") {
+                Keyboard.press(KEY_LEFT_SHIFT);
+                Keyboard.press(KEY_LEFT_ALT);
+                Keyboard.write('t');
+                Keyboard.release(KEY_LEFT_ALT);
+                Keyboard.release(KEY_LEFT_SHIFT);
+                Keyboard.println("whoami");
+            } else {
+                Keyboard.print(ps2.list());
+            }
 
             #ifdef DISPLAY
                 display.clear();
