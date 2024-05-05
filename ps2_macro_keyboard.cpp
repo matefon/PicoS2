@@ -47,9 +47,6 @@ private:
     std::set<std::string> keys;
     bool rel;
     bool ext;
-    #ifdef DISPLAY
-        pico_ssd1306::SSD1306* display;
-    #endif
 public:
     PS2() : rel(false), ext(false) {keys.clear();}
 
@@ -74,10 +71,6 @@ public:
             if (rel) { // remove key
                 release(key);
                 rel = false;
-                #ifdef DISPLAY
-                    display->clear();
-                    display->sendBuffer();
-                #endif
             } else {
                 keys.insert(key); // if no release code received, add key
             }
@@ -98,11 +91,6 @@ public:
 
     std::set<std::string> getkeys() const {return keys;}
 
-    #ifdef DISPLAY
-        void setdisplay(pico_ssd1306::SSD1306* d) {
-            display = d;
-        }
-    #endif
     friend std::ostream& operator<<(std::ostream& os, const PS2& k);
 
     ~PS2() {}
@@ -218,7 +206,6 @@ int main() {
         pico_ssd1306::drawText(&display, font_8x8, "PS2 macro", 0 ,0);
         pico_ssd1306::drawText(&display, font_8x8, "keyboard", 0 ,10);
         display.sendBuffer();
-        ps2.setdisplay(&display);
     #endif
     // *** from pico_superkey_board.cpp
     //bi_decl(bi_program_description("A PS/2 to macro keyboard software"));
@@ -269,7 +256,7 @@ int main() {
 
             Keyboard.print(ps2.list());
             #ifdef DISPLAY
-                //display.clear();
+                display.clear();
                 pico_ssd1306::drawText(&display, font_12x16, ps2.list().c_str(), 0 ,0);
                 display.sendBuffer();
             #endif
