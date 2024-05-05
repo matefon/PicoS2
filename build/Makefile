@@ -207,6 +207,32 @@ cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast:
 	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/build
 .PHONY : cyw43_driver_picow_cyw43_bus_pio_spi_pio_h/fast
 
+#=============================================================================
+# Target rules for targets named pico_ssd1306
+
+# Build rule for target.
+pico_ssd1306: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pico_ssd1306
+.PHONY : pico_ssd1306
+
+# fast build rule for target.
+pico_ssd1306/fast:
+	$(MAKE) $(MAKESILENT) -f pico-ssd1306/CMakeFiles/pico_ssd1306.dir/build.make pico-ssd1306/CMakeFiles/pico_ssd1306.dir/build
+.PHONY : pico_ssd1306/fast
+
+#=============================================================================
+# Target rules for targets named ssd1306_textRenderer
+
+# Build rule for target.
+ssd1306_textRenderer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ssd1306_textRenderer
+.PHONY : ssd1306_textRenderer
+
+# fast build rule for target.
+ssd1306_textRenderer/fast:
+	$(MAKE) $(MAKESILENT) -f pico-ssd1306/textRenderer/CMakeFiles/ssd1306_textRenderer.dir/build.make pico-ssd1306/textRenderer/CMakeFiles/ssd1306_textRenderer.dir/build
+.PHONY : ssd1306_textRenderer/fast
+
 Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.obj: Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp.obj
 .PHONY : Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.obj
 
@@ -1103,6 +1129,30 @@ home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps2_macro_keyboard.dir/build.make CMakeFiles/ps2_macro_keyboard.dir/home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 .PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 
+home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj: home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+.PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj
+
+# target to build an object file
+home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps2_macro_keyboard.dir/build.make CMakeFiles/ps2_macro_keyboard.dir/home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+.PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+
+home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i: home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+.PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i
+
+# target to preprocess a source file
+home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps2_macro_keyboard.dir/build.make CMakeFiles/ps2_macro_keyboard.dir/home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+.PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+
+home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s: home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+.PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s
+
+# target to generate assembly for a file
+home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps2_macro_keyboard.dir/build.make CMakeFiles/ps2_macro_keyboard.dir/home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+.PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+
 home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj: home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 .PHONY : home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj
 
@@ -1797,7 +1847,9 @@ help:
 	@echo "... bs2_default_padded_checksummed_asm"
 	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
 	@echo "... bs2_default"
+	@echo "... pico_ssd1306"
 	@echo "... ps2_macro_keyboard"
+	@echo "... ssd1306_textRenderer"
 	@echo "... Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.obj"
 	@echo "... Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.i"
 	@echo "... Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.s"
@@ -1910,6 +1962,9 @@ help:
 	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj"
 	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i"
 	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s"
+	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj"
+	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i"
+	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s"
 	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj"
 	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_irq/irq.i"
 	@echo "... home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/hardware_irq/irq.s"

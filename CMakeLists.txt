@@ -30,10 +30,14 @@ target_link_libraries(${PROJECT_NAME}
     pico_unique_id
     tinyusb_device
     tinyusb_board
+    hardware_i2c
+    pico_ssd1306
 )
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(${PROJECT_NAME})
+
+add_subdirectory(pico-ssd1306)
 
 add_definitions(-DUSE_TINYUSB)
 add_definitions(-DUSB_PRODUCT="Pico Keyboard")

@@ -167,3 +167,9 @@
 /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/src/rp2040/hardware_structs/CMakeFiles/rebuild_cache.dir
 /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/docs/CMakeFiles/edit_cache.dir
 /home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-sdk/docs/CMakeFiles/rebuild_cache.dir
+/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-ssd1306/CMakeFiles/pico_ssd1306.dir
+/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-ssd1306/CMakeFiles/edit_cache.dir
+/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-ssd1306/CMakeFiles/rebuild_cache.dir
+/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-ssd1306/textRenderer/CMakeFiles/ssd1306_textRenderer.dir
+/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-ssd1306/textRenderer/CMakeFiles/edit_cache.dir
+/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pico-ssd1306/textRenderer/CMakeFiles/rebuild_cache.dir

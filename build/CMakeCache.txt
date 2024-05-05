@@ -439,7 +439,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=81
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=83
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -493,7 +493,7 @@ PICO_BOOT_STAGE2_DIR:INTERNAL=/home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_com
 PICO_CMAKE_PRELOAD_PLATFORM_DIR:INTERNAL=/home/vinke/Documents/Pi_Pico/pico-sdk/cmake/preload/platforms
 PICO_CMAKE_PRELOAD_PLATFORM_FILE:INTERNAL=/home/vinke/Documents/Pi_Pico/pico-sdk/cmake/preload/platforms/rp2040.cmake
 PICO_COMPILER_ASM:INTERNAL=/usr/bin/arm-none-eabi-gcc
-PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs
+PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common/cmsis /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040/hardware_regs
 PICO_DOXYGEN_PATHS:INTERNAL= /home/vinke/Documents/Pi_Pico/pico-sdk/src/common /home/vinke/Documents/Pi_Pico/pico-sdk/lib/cyw43-driver/src /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2_common /home/vinke/Documents/Pi_Pico/pico-sdk/src/rp2040
 PICO_NO_HARDWARE:INTERNAL=0
 PICO_ON_DEVICE:INTERNAL=1

@@ -117,6 +117,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
   "elf2uf2/tmp/ELF2UF2Build-cfgcmd.txt.in"
   "pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp/PioasmBuild-cfgcmd.txt.in"
+  "../pico-ssd1306/CMakeLists.txt"
+  "../pico-ssd1306/textRenderer/CMakeLists.txt"
   "../pico_sdk_import.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeASMInformation.cmake"
   "/usr/share/cmake-3.22/Modules/CMakeCInformation.cmake"
@@ -234,6 +236,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "pico-sdk/src/rp2040/hardware_regs/CMakeFiles/CMakeDirectoryInformation.cmake"
   "pico-sdk/src/rp2040/hardware_structs/CMakeFiles/CMakeDirectoryInformation.cmake"
   "pico-sdk/docs/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "pico-ssd1306/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "pico-ssd1306/textRenderer/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -245,4 +249,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "pico-sdk/src/rp2_common/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm.dir/DependInfo.cmake"
   "pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/DependInfo.cmake"
   "pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir/DependInfo.cmake"
+  "pico-ssd1306/CMakeFiles/pico_ssd1306.dir/DependInfo.cmake"
+  "pico-ssd1306/textRenderer/CMakeFiles/ssd1306_textRenderer.dir/DependInfo.cmake"
   )

@@ -10,6 +10,7 @@
  * made by matefon (assisted by ChatGPT)
  */
 
+// for reading, io, basic Pico functions
 #include <iostream>
 #include <deque>
 #include <set>
@@ -17,15 +18,25 @@
 #include <iomanip>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
+// for keycodes
 #include "keycodes.h"
-
+// for USB HID
 #include "pico/binary_info.h"
 #include "includes/usb.h"
 #include "includes/Adafruit_USBD_CDC-stub.h"
 #include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h"
 #include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h"
 
-#define DEBUG
+//#define DEBUG
+#define DISPLAY
+#define PRINT
+
+#ifdef DISPLAY
+// for OLED 128x32 display
+    #include "pico-ssd1306/ssd1306.h"
+    #include "pico-ssd1306/textRenderer/TextRenderer.h"
+    #include "hardware/i2c.h"
+#endif
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
@@ -36,6 +47,9 @@ private:
     std::set<std::string> keys;
     bool rel;
     bool ext;
+    #ifdef DISPLAY
+        pico_ssd1306::SSD1306* display;
+    #endif
 public:
     PS2() : rel(false), ext(false) {keys.clear();}
 
@@ -60,6 +74,10 @@ public:
             if (rel) { // remove key
                 release(key);
                 rel = false;
+                #ifdef DISPLAY
+                    display->clear();
+                    display->sendBuffer();
+                #endif
             } else {
                 keys.insert(key); // if no release code received, add key
             }
@@ -80,6 +98,11 @@ public:
 
     std::set<std::string> getkeys() const {return keys;}
 
+    #ifdef DISPLAY
+        void setdisplay(pico_ssd1306::SSD1306* d) {
+            display = d;
+        }
+    #endif
     friend std::ostream& operator<<(std::ostream& os, const PS2& k);
 
     ~PS2() {}
@@ -179,6 +202,24 @@ int main() {
     stdio_init_all();
     stdio_uart_init_full(uart1, 115200,0,1);
 
+    #ifdef DISPLAY
+        gpio_init(11); // display power, the vcc pin is used for the ps2 keyboard
+        gpio_set_dir(11, GPIO_OUT);
+        gpio_put(11, 1);
+
+        i2c_init(i2c0, 1000000);
+        gpio_set_function(12, GPIO_FUNC_I2C);
+        gpio_set_function(13, GPIO_FUNC_I2C);
+        gpio_pull_up(12);
+        gpio_pull_up(13);
+        sleep_ms(250);
+        pico_ssd1306::SSD1306 display = pico_ssd1306::SSD1306(i2c0, 0x3C, pico_ssd1306::Size::W128xH32);
+        display.setOrientation(0);
+        pico_ssd1306::drawText(&display, font_8x8, "PS2 macro", 0 ,0);
+        pico_ssd1306::drawText(&display, font_8x8, "keyboard", 0 ,10);
+        display.sendBuffer();
+        ps2.setdisplay(&display);
+    #endif
     // *** from pico_superkey_board.cpp
     //bi_decl(bi_program_description("A PS/2 to macro keyboard software"));
     //bi_decl(bi_program_feature("USB HID Device"));
@@ -208,17 +249,30 @@ int main() {
     
     gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
-    sleep_ms(2000);
+    sleep_ms(500);
     std::cout << "Hello GPIO IRQ" << std::endl;
+
+    #ifdef DISPLAY
+        display.clear();
+        display.sendBuffer();
+    #endif
 
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
     // Wait forever
     while (1) {
         if (!ps2.empty()) {
-            std::cout << ps2 << std::endl;
+            #ifdef PRINT
+                std::cout << ps2 << std::endl;
+            #endif
             //Keyboard.write('a');
+
             Keyboard.print(ps2.list());
+            #ifdef DISPLAY
+                //display.clear();
+                pico_ssd1306::drawText(&display, font_12x16, ps2.list().c_str(), 0 ,0);
+                display.sendBuffer();
+            #endif
         }
         sleep_ms(100);
     }
