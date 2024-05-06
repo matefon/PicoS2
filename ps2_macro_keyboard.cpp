@@ -10,28 +10,23 @@
  * made by matefon (assisted by ChatGPT)
  */
 
-// for reading, io, basic Pico functions
-#include <iostream>
-#include <deque>
-#include <set>
-#include <sstream>
-#include <iomanip>
-#include "pico/stdlib.h"
-#include "hardware/gpio.h"
-// for keycodes
-#include "keycodes.h"
-#include "usb_codes.h"
-// for USB HID
-#include "pico/binary_info.h"
-#include "includes/usb.h"
-#include "includes/Adafruit_USBD_CDC-stub.h"
-#include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h"
-#include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h"
-
+// *** MACROS *** //
 //#define DEBUG // additional prints on the terminal, for debugging use
 //#define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
+//#define INFOKEY "F1" // for future use
+// ************* //
+
+#include <iostream> // for reading, io, basic Pico functions
+#include <deque> // for storing data bits
+#include <set> // for storing pressed keys efficiently
+#include <sstream> // for reading, io, basic Pico functions
+#include <iomanip> // for reading, io, basic Pico functions
+#include "pico/stdlib.h" // for reading, io, basic Pico functions
+#include "hardware/gpio.h" // for reading, io, basic Pico functions
+#include "keycodes.h" // for keycodes
+#include "usb_codes.h" // for keycodes
 
 #ifndef USB
     #ifndef DISPLAY
@@ -39,14 +34,19 @@
     #endif // DISPLAY
 #endif // USB
 
-//#define INFOKEY "F1"
-
 #ifdef DISPLAY
-// for OLED 128x32 display
-    #include "pico-ssd1306/ssd1306.h"
-    #include "pico-ssd1306/textRenderer/TextRenderer.h"
-    #include "hardware/i2c.h"
+    #include "pico-ssd1306/ssd1306.h" // for OLED 128x32 display
+    #include "pico-ssd1306/textRenderer/TextRenderer.h" // for OLED 128x32 display
+    #include "hardware/i2c.h" // for OLED 128x32 display
 #endif
+
+#ifdef USB
+    #include "pico/binary_info.h" // for USB HID
+    #include "includes/usb.h" // for USB HID
+    #include "includes/Adafruit_USBD_CDC-stub.h" // for USB HID
+    #include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h" // for USB HID
+    #include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h" // for USB HID
+#endif // USB
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
@@ -60,7 +60,7 @@ private:
 public:
     PS2() : rel(false), ext(false) {keys.clear();}
 
-    // Return value? It should return if insertion is successful, but insert() returns std::pair.
+    // No return for minimizing memory usage
     void press(std::string hex_key) {
         #ifdef DEBUG
             std::cout << "[PS2 hex] " << hex_key << std::endl;
@@ -87,7 +87,8 @@ public:
         }
     } 
 
-    int release(std::string key) {return keys.erase(key);}
+    // No return for minimizing memory usage
+    void release(std::string key) {keys.erase(key);}
 
     bool empty() {return keys.empty();}
 
