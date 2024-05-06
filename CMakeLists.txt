@@ -15,7 +15,6 @@ pico_sdk_init()
 
 add_executable(${PROJECT_NAME}
         ps2_macro_keyboard.cpp
-        #pico-superkey-board.cpp
         TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.cpp
         Adafruit_TinyUSB_Arduino/src/arduino/hid/Adafruit_USBD_HID.cpp
         Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp
