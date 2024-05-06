@@ -40,13 +40,11 @@
     #include "hardware/i2c.h" // for OLED 128x32 display
 #endif
 
-#ifdef USB
-    #include "pico/binary_info.h" // for USB HID
-    #include "includes/usb.h" // for USB HID
-    #include "includes/Adafruit_USBD_CDC-stub.h" // for USB HID
-    #include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h" // for USB HID
-    #include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h" // for USB HID
-#endif // USB
+#include "pico/binary_info.h" // for USB HID
+#include "includes/usb.h" // for USB HID
+#include "includes/Adafruit_USBD_CDC-stub.h" // for USB HID
+#include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h" // for USB HID
+#include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h" // for USB HID
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
@@ -244,7 +242,7 @@ int main() {
     gpio_set_dir(CLK_PIN, GPIO_IN);
     gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
-    sleep_ms(500);
+    sleep_ms(100);
 
     std::cout << "PS/2 macro keyboard" << std::endl;
     #ifdef USB
