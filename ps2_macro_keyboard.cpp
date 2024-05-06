@@ -279,6 +279,7 @@ int main() {
                     Keyboard.press(KEY_LEFT_ALT);
                     Keyboard.write('t');
                     Keyboard.releaseAll();
+                    sleep_ms(500);
                     Keyboard.println("whoami");
                 } else {
                     Keyboard.print(ps2.list());

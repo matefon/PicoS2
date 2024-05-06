@@ -4,3 +4,6 @@
 [submodule "TinyUSB_Mouse_and_Keyboard"]
 	path = TinyUSB_Mouse_and_Keyboard
 	url = https://github.com/cyborg5/TinyUSB_Mouse_and_Keyboard/
+[submodule "pico-ssd1306 "]
+	path = pico-ssd1306
+	url = https://github.com/Harbys/pico-ssd1306/
