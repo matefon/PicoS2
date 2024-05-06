@@ -6,6 +6,7 @@
 
 // extra keycodes: https://www.win.tue.nl/~aeb/linux/kbd/scancodes-14.html
 // some more: see usb_hid_keys.h
+// note: as the code uses the arduino library by default, see: https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
 
 std::unordered_map<std::string, uint8_t> usb_codes = {
     {"ESC", 0xB1},

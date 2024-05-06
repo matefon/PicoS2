@@ -1,4 +1,5 @@
 // source: https://gist.github.com/ekaitz-zarraga/2b25b94b711684ba4e969e5a5723969b
+// note: the fact that I found this is very good, but the codes do not work: Left Ctrl is 0x80, and that is working but here it is 0xe0
 
 /**
  * USB HID Keyboard scan codes as per USB spec 1.11
