@@ -28,9 +28,10 @@
 #include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h"
 #include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h"
 
-//#define DEBUG
-#define DISPLAY
-#define PRINT
+//#define DEBUG // additional prints on the terminal, for debugging use
+//#define USB // comment this to use screen alone, as the code waits for USB connection to be established
+#define DISPLAY // enable OLED screen
+#define PRINT // enable printing to terminal (less info, than debug, but enough)
 
 //#define INFOKEY "F1"
 
@@ -57,7 +58,7 @@ public:
     void press(std::string hex_key) {
         #ifdef DEBUG
             std::cout << "[PS2 hex] " << hex_key << std::endl;
-        #endif
+        #endif // DEBUG
         if (hex_key == "F0") { // if release code is received, the next key should be removed
             rel = true;
         } else if (hex_key == "E0") {
@@ -70,7 +71,7 @@ public:
             std::string key = keycodes[hex_key];
             #ifdef DEBUG
                 std::cout << "[PS2 key] " << key << std::endl;
-            #endif
+            #endif // DEBUG
             if (rel) { // remove key
                 release(key);
                 rel = false;
@@ -158,7 +159,7 @@ void gpio_callback(uint gpio, uint32_t events) {
                 std::string hex_key = byte_to_hex(received_byte);
                 #ifdef DEBUG
                     std::cout << "[CALLBACK hex] " << hex_key << std::endl;  
-                #endif
+                #endif // DEBUG
                 if (keycodes.find(hex_key) != keycodes.end()) {
                     //std::cout << "Received key: " << keycodes[hex_key] << std::endl;
                     ps2.press(hex_key);
@@ -209,77 +210,87 @@ int main() {
         pico_ssd1306::drawText(&display, font_8x8, "PS2 macro", 0 ,0);
         pico_ssd1306::drawText(&display, font_8x8, "keyboard", 0 ,10);
         display.sendBuffer();
-    #endif
-    // *** from pico_superkey_board.cpp
-    //bi_decl(bi_program_description("A PS/2 to macro keyboard software"));
-    //bi_decl(bi_program_feature("USB HID Device"));
+    #endif // DISPLAY
 
-    board_init(); // Sets up the onboard LED as an output
-    TinyUSBDevice.begin(); // Initialise Adafruit TinyUSB
+    #ifdef USB
+        // *** from pico_superkey_board.cpp
+        //bi_decl(bi_program_description("A PS/2 to macro keyboard software"));
+        //bi_decl(bi_program_feature("USB HID Device"));
 
-    // Timer for regularly processing USB events
-    struct repeating_timer timer;
-    add_repeating_timer_ms(10, loopTask, NULL, &timer);
+        board_init(); // Sets up the onboard LED as an output
+        TinyUSBDevice.begin(); // Initialise Adafruit TinyUSB
 
-    // Initialise a keyboard (code will wait here to be plugged in)
-    Keyboard.begin();
-                
-    //Keyboard.release(KEY_LEFT_GUI); // and true is released
-    //Keyboard.press(KEY_LEFT_GUI);
-    // ***
+        // Timer for regularly processing USB events
+        struct repeating_timer timer;
+        add_repeating_timer_ms(10, loopTask, NULL, &timer);
+
+        // Initialise a keyboard (code will wait here to be plugged in)
+        Keyboard.begin();
+        // ***
+    #endif // USB
 
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);    
-    
     gpio_init(DATA_PIN);
     gpio_set_dir(DATA_PIN, GPIO_IN);
-
     gpio_init(CLK_PIN);
     gpio_set_dir(CLK_PIN, GPIO_IN);
-    
     gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
     sleep_ms(500);
-    std::cout << "Hello GPIO IRQ" << std::endl;
+
+    std::cout << "PS/2 macro keyboard" << std::endl;
+    #ifdef USB
+        std::cout << "[DEFINED: USB]" << std::endl;
+    #endif // USB
+    #ifdef DISPLAY
+    std::cout << "[DEFINED: DISPLAY]" << std::endl;
+    #endif // DISPLAY
+    #ifdef DEBUG
+        std::cout << "[DEFINED: DEBUG]" << std::endl;
+    #endif // DEBUG
+    #ifdef PRINT
+        std::cout << "[DEFINED: PRINT]" << std::endl;
+    #endif // PRINT
+
 
     #ifdef DISPLAY
         display.clear();
         display.sendBuffer();
-    #endif
+    #endif // DISPLAY
 
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
-    // Wait forever
+    // Main loop
     while (1) {
         if (!ps2.empty()) {
             #ifdef PRINT
                 std::cout << ps2 << std::endl;
-            #endif
-            //Keyboard.write('a');
+            #endif // PRINT
             std::string keylist = ps2.list();
-            if (keylist == "F1") {
-                Keyboard.press(KEY_LEFT_SHIFT);
-                Keyboard.press(KEY_LEFT_ALT);
-                Keyboard.write('t');
-                Keyboard.release(KEY_LEFT_ALT);
-                Keyboard.release(KEY_LEFT_SHIFT);
-                Keyboard.println("whoami");
-            } else {
-                Keyboard.print(ps2.list());
-            }
-
+            #ifdef USB
+                if (keylist == "F1") {
+                    Keyboard.press(KEY_LEFT_CTRL);
+                    Keyboard.press(KEY_LEFT_ALT);
+                    Keyboard.write('t');
+                    Keyboard.releaseAll()
+                    Keyboard.println("whoami");
+                } else {
+                    Keyboard.print(ps2.list());
+                }
+            #endif // USB
             #ifdef DISPLAY
                 display.clear();
-                pico_ssd1306::drawText(&display, font_12x16, ps2.list().c_str(), 0 ,0);
+                pico_ssd1306::drawText(&display, font_12x16, keylist.c_str(), 0 ,0);
                 display.sendBuffer();
-            #endif
+            #endif // DISPLAY
         } 
         #ifdef DISPLAY
             else {
                 display.clear();
                 display.sendBuffer();
             }
-        #endif
+        #endif // DISPLAY
         sleep_ms(100);
     }
 }
