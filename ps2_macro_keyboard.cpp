@@ -33,6 +33,12 @@
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
 
+#ifndef USB
+    #ifndef DISPLAY
+        #warning Not enabling DISPLAY when USB is disabled is for testing, no data is transmitted via USB and nothing is displayed.
+    #endif // DISPLAY
+#endif // USB
+
 //#define INFOKEY "F1"
 
 #ifdef DISPLAY

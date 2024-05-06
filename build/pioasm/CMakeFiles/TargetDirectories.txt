@@ -1,3 +1,0 @@
-/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm/CMakeFiles/pioasm.dir
-/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm/CMakeFiles/edit_cache.dir
-/home/vinke/Documents/Pi_Pico/ps2_macro_keyboard/build/pioasm/CMakeFiles/rebuild_cache.dir
