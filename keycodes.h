@@ -19,7 +19,7 @@ std::unordered_map<std::string, std::string> keycodes = {
     {"09", "F10"},
     {"78", "F11"},
     {"07", "F12"},
-    // {"E07CE0F012", "Prt Scr"}, // forgetaboutit, release code: E0F07CE0F012
+    // {"E07CE0F012", "Prt Scr"}, // release code: E0F07CE0F012
     {"7E", "Scroll Lock"},
     // {"E11477E1F014E077", "Pause/Break"}, // release code: None
     {"0E", "`"},
