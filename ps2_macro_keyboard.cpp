@@ -242,7 +242,7 @@ int main() {
     gpio_set_dir(CLK_PIN, GPIO_IN);
     gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
-    sleep_ms(100); // wait a little to get terminal output
+    sleep_ms(300); // wait a little to get terminal output
 
     std::cout << "PS/2 macro keyboard" << std::endl;
     #ifdef USB
@@ -260,6 +260,7 @@ int main() {
 
 
     #ifdef DISPLAY
+        sleep_ms(1200);
         display.clear();
         display.sendBuffer();
     #endif // DISPLAY
