@@ -12,7 +12,7 @@
 
 // *** MACROS *** //
 //#define DEBUG // additional prints on the terminal, for debugging use
-//#define USB // comment this to use screen alone, as the code waits for USB connection to be established
+#define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
 //#define INFOKEY "F1" // for future use
@@ -242,7 +242,7 @@ int main() {
     gpio_set_dir(CLK_PIN, GPIO_IN);
     gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
-    sleep_ms(100);
+    sleep_ms(100); // wait a little to get terminal output
 
     std::cout << "PS/2 macro keyboard" << std::endl;
     #ifdef USB
@@ -278,7 +278,7 @@ int main() {
                     Keyboard.press(KEY_LEFT_CTRL);
                     Keyboard.press(KEY_LEFT_ALT);
                     Keyboard.write('t');
-                    Keyboard.releaseAll()
+                    Keyboard.releaseAll();
                     Keyboard.println("whoami");
                 } else {
                     Keyboard.print(ps2.list());
