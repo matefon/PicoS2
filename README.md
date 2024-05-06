@@ -1,6 +1,8 @@
 # PicoS2
 ## RPi Pico macro-keyboard project which uses a PS/2 keyboard's input to send keystrokes to the computer.
 
+## To build, you need Pico SDK in your path, arm compilers (see CMakeLists.txt) and copy pico_sdk_import.cmake in the folder, next to ps2_macro_keyboard.cpp!
+
 ### IMPORTANT NOTES
 The software is currently in heavy development, which means:
 - the program can only read the PS/2 keys pressed and display them via UART
