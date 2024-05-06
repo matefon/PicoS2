@@ -274,16 +274,22 @@ int main() {
             #endif // PRINT
             std::string keylist = ps2.list();
             #ifdef USB
-                if (keylist == "F1") {
+                if (keylist.find("F1") != std::string::npos) { // keylist == "F1"
                     Keyboard.press(KEY_LEFT_CTRL);
                     Keyboard.press(KEY_LEFT_ALT);
                     Keyboard.write('t');
                     Keyboard.releaseAll();
                     sleep_ms(500);
                     Keyboard.println("whoami");
-                } else {
-                    Keyboard.print(ps2.list());
+                } else if (keylist.find("F2") != std::string::npos) {
+                    Keyboard.press(0x7f);
                 }
+
+                else { // if no macro is defined, press the key instead (note: disable this in future use, as it is a macro keyboard, not a keyboard)
+                    Keyboard.write(usb_codes[keylist]);
+                    //Keyboard.print(keylist);
+                }
+
             #endif // USB
             #ifdef DISPLAY
                 display.clear();

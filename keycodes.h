@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 
+// source: https://techdocs.altium.com/display/FPGA/PS2+Keyboard+Scan+Codes
 // Define a mapping from scan code to key name
 std::unordered_map<std::string, std::string> keycodes = {
     {"76", "ESC"},
