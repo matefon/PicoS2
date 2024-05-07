@@ -41,7 +41,7 @@
 
 #include "pico/binary_info.h" // for USB HID
 #include "includes/usb.h" // for USB HID
-#include <tinyusb>
+#include "pico/tinyusb.h"
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
