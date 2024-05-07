@@ -3,6 +3,8 @@
 
 ## To build, you need Pico SDK in your path, arm compilers (see CMakeLists.txt) and copy pico_sdk_import.cmake in the folder, next to ps2_macro_keyboard.cpp!
 
+Currently working on migrating from the "little" TinyUsb library (an Arduino HID port) to the official TinyUsb library. That library has better support for keys, control and so on, but has a different system. The main branch is kept at the last working "little" TinyUsb library state, and the tinyusb branch is working on implementing the TinyUsb library.
+
 ### IMPORTANT NOTES
 The software is currently in heavy development, which means:
 - the program can only read the PS/2 keys pressed and display them via UART
