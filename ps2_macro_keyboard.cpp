@@ -41,9 +41,7 @@
 
 #include "pico/binary_info.h" // for USB HID
 #include "includes/usb.h" // for USB HID
-#include "includes/Adafruit_USBD_CDC-stub.h" // for USB HID
-#include "Adafruit_TinyUSB_Arduino/src/Adafruit_TinyUSB.h" // for USB HID
-#include "TinyUSB_Mouse_and_Keyboard/TinyUSB_Mouse_and_Keyboard.h" // for USB HID
+#include <tinyusb>
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
