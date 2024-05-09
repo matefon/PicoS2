@@ -262,16 +262,19 @@ int main() {
             #endif // PRINT
             std::string keylist = ps2.list();
             #ifdef USB
-                if (keylist == "F1") { // keylist.find("F1") != std::string::npos
+                if (keylist == "F1") {
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LALT);
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_B);
                 } else if (keylist == "F2") {
                     send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0xe2);
+                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0xe2);
                 }
 
                 else { // if no macro is defined, press the key instead (note: disable this in future use, as it is a macro keyboard, not a keyboard)
-                    ;
+                    send_hid_report(REPORT_ID_KEYBOARD, usb_codes[keylist.c_str()]);
+                    sleep_ms(5);
+                    send_hid_report(REPORT_ID_KEYBOARD, 0);
                 }
 
             #endif // USB

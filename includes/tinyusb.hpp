@@ -77,7 +77,7 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
       if ( btn )
       {
         uint8_t keycode[6] = { 0 };
-        keycode[0] = HID_KEY_A;
+        keycode[0] = btn;
 
         tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
         has_keyboard_key = true;
