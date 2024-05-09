@@ -40,8 +40,12 @@
 #endif
 
 #include "pico/binary_info.h" // for USB HID
-#include "includes/usb.h" // for USB HID
-#include "pico/tinyusb.h"
+#include "tinyusb/hw/bsp/board_api.h"
+#include "tusb.h"
+#include "includes/usb_descriptors.h"
+#include "includes/tinyusb.hpp"
+#include "usb_hid_keys.h"
+
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
@@ -179,17 +183,6 @@ void gpio_callback(uint gpio, uint32_t events) {
     }
 }
 
-// **************** from pico-superkey-board.cpp:
-// This function is called by a timer to change the on-board LED to flash
-// differently depending on USB state
-static bool loopTask(repeating_timer_t *rt){
-    led_blinking_task();
-    return true;
-}
-
-// Adafruit TinyUSB instance
-extern Adafruit_USBD_Device TinyUSBDevice;
-
 // *********************
 
 int main() {
@@ -215,19 +208,13 @@ int main() {
     #endif // DISPLAY
 
     #ifdef USB
-        // *** from pico_superkey_board.cpp
-        //bi_decl(bi_program_description("A PS/2 to macro keyboard software"));
-        //bi_decl(bi_program_feature("USB HID Device"));
-
         board_init(); // Sets up the onboard LED as an output
-        TinyUSBDevice.begin(); // Initialise Adafruit TinyUSB
+        tud_init(BOARD_TUD_RHPORT);
 
-        // Timer for regularly processing USB events
-        struct repeating_timer timer;
-        add_repeating_timer_ms(10, loopTask, NULL, &timer);
+        if (board_init_after_tusb) {
+            board_init_after_tusb();
+        }
 
-        // Initialise a keyboard (code will wait here to be plugged in)
-        Keyboard.begin();
         // ***
     #endif // USB
 
@@ -266,6 +253,9 @@ int main() {
 
     // Main loop
     while (1) {
+        tud_task(); // tinyusb device task
+        led_blinking_task();
+        hid_task();
         if (!ps2.empty()) {
             #ifdef PRINT
                 std::cout << ps2 << std::endl;
@@ -273,19 +263,15 @@ int main() {
             std::string keylist = ps2.list();
             #ifdef USB
                 if (keylist == "F1") { // keylist.find("F1") != std::string::npos
-                    Keyboard.press(KEY_LEFT_CTRL);
-                    Keyboard.press(KEY_LEFT_ALT);
-                    Keyboard.write('t');
-                    Keyboard.releaseAll();
-                    sleep_ms(500);
-                    Keyboard.println("whoami");
+                    send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
+                    send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LALT);
+                    send_hid_report(REPORT_ID_KEYBOARD, KEY_T);
                 } else if (keylist == "F2") {
-                    Keyboard.press(0xe2);
+                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0xe2);
                 }
 
                 else { // if no macro is defined, press the key instead (note: disable this in future use, as it is a macro keyboard, not a keyboard)
-                    Keyboard.write(usb_codes[keylist]);
-                    //Keyboard.print(keylist);
+                    ;
                 }
 
             #endif // USB

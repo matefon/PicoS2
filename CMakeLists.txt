@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 
-include(pico_sdk_import.cmake)
+set(BOARD pico_sdk)
+set(FAMILY rp2040)
+include(tinyusb/hw/bsp/family_support.cmake pico_sdk_import.cmake)
 
 project(ps2_macro_keyboard C CXX ASM)
 
@@ -13,15 +15,20 @@ set(CMAKE_CXX_COMPILER /usr/bin/arm-none-eabi-g++)
 
 pico_sdk_init()
 
-add_executable(${PROJECT_NAME}
-        ps2_macro_keyboard.cpp
-)   
+add_executable(${PROJECT_NAME})   
+target_sources(${PROJECT_NAME} PUBLIC
+    ps2_macro_keyboard.cpp
+    includes/usb_descriptors.c
+)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR} tinyusb/src)
 
 target_link_libraries(${PROJECT_NAME}
     pico_stdlib
     pico_unique_id
+    tinyusb_common
+    tinyusb_device_base
+    tinyusb_bsp
     tinyusb_device
     tinyusb_board
     hardware_i2c
@@ -31,10 +38,11 @@ target_link_libraries(${PROJECT_NAME}
 # create map/bin/hex file etc.
 pico_add_extra_outputs(${PROJECT_NAME})
 
-add_subdirectory(pico-ssd1306)
+add_subdirectory(pico-ssd1306 tinyusb/src)
 
 add_definitions(-DUSB_PRODUCT="Pico Keyboard")
 add_definitions(-DCFG_TUSB_CONFIG_FILE="includes/tusb_config.h")
+add_definitions(-DUSE_TINYUSB)
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(${PROJECT_NAME} 0)
