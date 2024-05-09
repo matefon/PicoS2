@@ -265,7 +265,7 @@ int main() {
                 if (keylist == "F1") { // keylist.find("F1") != std::string::npos
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LALT);
-                    send_hid_report(REPORT_ID_KEYBOARD, KEY_T);
+                    send_hid_report(REPORT_ID_KEYBOARD, KEY_B);
                 } else if (keylist == "F2") {
                     send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0xe2);
                 }
