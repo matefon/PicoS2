@@ -186,6 +186,16 @@ void gpio_callback(uint gpio, uint32_t events) {
 
 // *********************
 
+#ifdef EMULATE
+    bool emulate(struct repeating_timer *t) {
+        static std::string test[12] = {"2C", "F0", "2C", "24", "F0", "24", "1B", "F0", "1B", "2C", "F0", "2C"}; // test
+        static int test_i = 0;
+        if (test_i == 12) test_i = 0;
+        ps2.press(test[test_i++]);
+        return true;
+    }
+#endif
+
 int main() {
     stdio_init_all();
     stdio_uart_init_full(uart1, 115200,0,1);
@@ -254,13 +264,6 @@ int main() {
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
     #ifdef EMULATE
-        bool emulate(struct repeating_timer *t) {
-            static std::string test[12] = {"2C", "F0", "2C", "24", "F0", "24", "1B", "F0", "1B", "2C", "F0", "2C"}; // test
-            static int test_i = 0;
-            if (test_i == 12) test_i = 0;
-            ps2.press(test[test_i++]);
-            return true;
-        }
         struct repeating_timer timer;
         add_repeating_timer_ms(100, emulate, NULL, &timer);
     #endif
