@@ -188,9 +188,9 @@ void gpio_callback(uint gpio, uint32_t events) {
 
 #ifdef EMULATE
     bool emulate(struct repeating_timer *t) {
-        static std::string test[12] = {"2C", "F0", "2C", "24", "F0", "24", "1B", "F0", "1B", "2C", "F0", "2C"}; // test
+        static std::string test[9] = {"1C", "F0", "1C", "32", "F0", "32", "06", "F0", "06"}; // A, B, F2
         static int test_i = 0;
-        if (test_i == 12) test_i = 0;
+        if (test_i == 9) test_i = 0;
         ps2.press(test[test_i++]);
         return true;
     }
@@ -285,8 +285,8 @@ int main() {
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_T);
                     send_hid_report(REPORT_ID_KEYBOARD, 0);
                 } else if (keylist == "F2") {
-                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0x7f);
-                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0);
+                    send_hid_report(REPORT_ID_KEYBOARD, 0x7f); // mute
+                    send_hid_report(REPORT_ID_KEYBOARD, 0);
                 }
 
                 else { // if no macro is defined, press the key instead (note: disable this in future use, as it is a macro keyboard, not a keyboard)
