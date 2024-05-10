@@ -168,7 +168,6 @@ void gpio_callback(uint gpio, uint32_t events) {
                     std::cout << "[CALLBACK hex] " << hex_key << std::endl;  
                 #endif // DEBUG
                 if (keycodes.find(hex_key) != keycodes.end()) {
-                    std::cout << "Data bits: " << data_bits[30] << std::endl;
                     ps2.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
@@ -207,18 +206,32 @@ void gpio_callback(uint gpio, uint32_t events) {
  * @param key4 5th key to be pressed
  * @param key5 6th key to be pressed
  */
-void press(const size_t delay, const uint8_t key0 = 0, const uint8_t key1 = 0, const uint8_t key2 = 0, const uint8_t key3 = 0, const uint8_t key4 = 0, const uint8_t key5 = 0) {
+void press(const size_t delay, const std::vector<uint8_t> keycodes) {
     uint8_t keycode[6] = { 0 };
-    keycode[0] = key0;
-    keycode[1] = key1;
-    keycode[2] = key2;
-    keycode[3] = key3;
-    keycode[4] = key4;
-    keycode[5] = key5;
+    int i = 0;
+    int keycodes_size = keycodes.size();
+    for (auto it : keycodes) {
+        keycode[i++] = it;
+        std::cout << "loop: " << it << std::endl;
+    }
+    std::cout << "press: " << keycode[0] << keycode[1] << std::endl;
     tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
     hid_task();
     sleep_ms(delay);
     tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+    hid_task();
+}
+
+bool send_macro(const std::set<std::string> keys) {
+    if (keys.size() > 6 || keys.empty())
+        return false;
+    else {
+        for (auto it : keys) {
+            press(5, ps2_to_macro[it]);
+            std::cout << "it: " << it << "begin: " << (uint8_t)ps2_to_macro[it][0] << std::endl;
+        }
+    }
+    return true;
 }
 
 int main() {
@@ -246,7 +259,7 @@ int main() {
         gpio_pull_up(13);
         sleep_ms(250);
         pico_ssd1306::SSD1306 display = pico_ssd1306::SSD1306(i2c0, 0x3C, pico_ssd1306::Size::W128xH32);
-        display.setOrientation(0);
+        display.setOrientation(1);
         pico_ssd1306::drawText(&display, font_8x8, "PicoS2", 0 ,0);
         pico_ssd1306::drawText(&display, font_8x8, "by matefon", 0 ,10);
         display.sendBuffer();
@@ -329,19 +342,7 @@ int main() {
             #endif // PRINT
             std::string keylist = ps2.list();
             #ifdef USB
-                if (keylist == "F1") {
-                    press(5, KEY_LEFTCTRL, KEY_LEFTALT, KEY_T);
-                } 
-                else if (keylist == "F2") {
-                    send_hid_report(REPORT_ID_KEYBOARD, 0x7f); // mute
-                    send_hid_report(REPORT_ID_KEYBOARD, 0);
-                }
-
-                else { // if no macro is defined, press the key instead (note: disable this in future use, as it is a macro keyboard, not a keyboard)
-                    send_hid_report(REPORT_ID_KEYBOARD, usb_codes[keylist.c_str()]);
-                    send_hid_report(REPORT_ID_KEYBOARD, 0);
-                }
-
+                send_macro(ps2.getkeys());
             #endif // USB
             #ifdef DISPLAY
                 display.clear();
