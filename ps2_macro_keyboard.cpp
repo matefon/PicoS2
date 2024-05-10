@@ -15,7 +15,7 @@
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
 //#define INFOKEY "F1" // for future use
-#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
+//#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
 // ************* //
 
 #include <iostream> // for reading, io, basic Pico functions
@@ -168,7 +168,7 @@ void gpio_callback(uint gpio, uint32_t events) {
                     std::cout << "[CALLBACK hex] " << hex_key << std::endl;  
                 #endif // DEBUG
                 if (keycodes.find(hex_key) != keycodes.end()) {
-                    //std::cout << "Received key: " << keycodes[hex_key] << std::endl;
+                    std::cout << "Data bits: " << data_bits[30] << std::endl;
                     ps2.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
@@ -196,9 +196,34 @@ void gpio_callback(uint gpio, uint32_t events) {
     }
 #endif // EMULATE
 
+/**
+ * @brief Using the keyboard_report function from tinyusb to press (and relase) keys.
+ * The function takes delay time and keys as arguments. Up to 6 keys can be added, this is a limitation of tinyusb (or USB?)
+ * @param delay The amount of time in ms to wait before releasing.
+ * @param key0 1st key to be pressed
+ * @param key1 2nd key to be pressed
+ * @param key2 3rd key to be pressed
+ * @param key3 4th key to be pressed
+ * @param key4 5th key to be pressed
+ * @param key5 6th key to be pressed
+ */
+void press(const size_t delay, const uint8_t key0 = 0, const uint8_t key1 = 0, const uint8_t key2 = 0, const uint8_t key3 = 0, const uint8_t key4 = 0, const uint8_t key5 = 0) {
+    uint8_t keycode[6] = { 0 };
+    keycode[0] = key0;
+    keycode[1] = key1;
+    keycode[2] = key2;
+    keycode[3] = key3;
+    keycode[4] = key4;
+    keycode[5] = key5;
+    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
+    hid_task();
+    sleep_ms(delay);
+    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+}
+
 int main() {
     stdio_init_all();
-    stdio_uart_init_full(uart1, 115200,0,1);
+    stdio_uart_init_full(uart1, 115200,0,1); // for terminal with USB-TTL adapter
 
     #ifdef USB
         board_init(); // Sets up the onboard LED as an output
@@ -207,7 +232,7 @@ int main() {
         if (board_init_after_tusb) {
             board_init_after_tusb();
         }
-    #endif // USB    
+    #endif // USB  
 
     #ifdef DISPLAY
         gpio_init(11); // display power, the vcc pin is used for the ps2 keyboard
@@ -222,8 +247,8 @@ int main() {
         sleep_ms(250);
         pico_ssd1306::SSD1306 display = pico_ssd1306::SSD1306(i2c0, 0x3C, pico_ssd1306::Size::W128xH32);
         display.setOrientation(0);
-        pico_ssd1306::drawText(&display, font_8x8, "PS2 macro", 0 ,0);
-        pico_ssd1306::drawText(&display, font_8x8, "keyboard", 0 ,10);
+        pico_ssd1306::drawText(&display, font_8x8, "PicoS2", 0 ,0);
+        pico_ssd1306::drawText(&display, font_8x8, "by matefon", 0 ,10);
         display.sendBuffer();
     #endif // DISPLAY
 
@@ -237,31 +262,56 @@ int main() {
     
     sleep_ms(300); // wait a little to get terminal output
 
-    std::cout << "PS/2 macro keyboard" << std::endl;
+    std::cout << "PicoS2 - The PS/2 macro keyboard by matefon" << std::endl;
+    std::cout << "Enabled modules:  (definitions)" << std::endl;
     #ifdef USB
-        std::cout << "[DEFINED: USB]" << std::endl;
+        std::cout << "[USB] {wait for connection}" << std::endl;
     #endif // USB
     #ifdef DISPLAY
-    std::cout << "[DEFINED: DISPLAY]" << std::endl;
+    std::cout << "[DISPLAY]" << std::endl;
     #endif // DISPLAY
     #ifdef DEBUG
-        std::cout << "[DEFINED: DEBUG]" << std::endl;
+        std::cout << "[DEBUG]" << std::endl;
     #endif // DEBUG
     #ifdef PRINT
-        std::cout << "[DEFINED: PRINT]" << std::endl;
+        std::cout << "[PRINT]" << std::endl;
     #endif // PRINT
     #ifdef EMULATE
-        std::cout << "[DEFINED: EMULATE]" << std::endl;
+        std::cout << "[EMULATE]" << std::endl;
     #endif // EMULATE
 
-
     #ifdef DISPLAY
-        sleep_ms(1200);
+        sleep_ms(1000);
         display.clear();
         display.sendBuffer();
     #endif // DISPLAY
 
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
+
+    #ifdef USB // wait to be initialized
+        #ifdef DISPLAY
+            display.clear();
+            pico_ssd1306::drawText(&display, font_8x8, "[USB]", 0 ,0);
+            pico_ssd1306::drawText(&display, font_8x8, "connecting...", 0 ,10);
+            display.sendBuffer();
+        #endif // DISPLAY
+        while (!tud_hid_ready()) {
+            tud_task(); 
+            led_blinking_task(); 
+            hid_task(); 
+            sleep_ms(100);
+        }
+        std::cout << "[USB] {connected}" << std::endl;
+        #ifdef DISPLAY
+            display.clear();
+            pico_ssd1306::drawText(&display, font_8x8, "[USB]", 0 ,0);
+            pico_ssd1306::drawText(&display, font_8x8, "connected", 0 ,10);
+            display.sendBuffer();
+            sleep_ms(500);
+            display.clear();
+            display.sendBuffer();
+        #endif // DISPLAY
+    #endif // USB
 
     #ifdef EMULATE
         struct repeating_timer timer;
@@ -280,18 +330,9 @@ int main() {
             std::string keylist = ps2.list();
             #ifdef USB
                 if (keylist == "F1") {
-                    /*send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
-                    send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LALT);
-                    send_hid_report(REPORT_ID_KEYBOARD, KEY_T);
-                    send_hid_report(REPORT_ID_KEYBOARD, 0);*/
-                    uint8_t keycode[6] = { 0 };
-                    keycode[0] = KEY_LEFTCTRL;
-                    keycode[1] = KEY_LEFTALT;
-                    keycode[2] = KEY_T;
-                    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
-                    hid_task();
-                    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
-                } else if (keylist == "F2") {
+                    press(5, KEY_LEFTCTRL, KEY_LEFTALT, KEY_T);
+                } 
+                else if (keylist == "F2") {
                     send_hid_report(REPORT_ID_KEYBOARD, 0x7f); // mute
                     send_hid_report(REPORT_ID_KEYBOARD, 0);
                 }
@@ -311,6 +352,7 @@ int main() {
         #ifdef DISPLAY
             else {
                 display.clear();
+                pico_ssd1306::drawText(&display, font_8x8, "[]", 110, 24);
                 display.sendBuffer();
             }
         #endif // DISPLAY
