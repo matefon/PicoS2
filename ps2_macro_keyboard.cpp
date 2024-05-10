@@ -15,6 +15,7 @@
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
 //#define INFOKEY "F1" // for future use
+#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
 // ************* //
 
 #include <iostream> // for reading, io, basic Pico functions
@@ -214,8 +215,6 @@ int main() {
         if (board_init_after_tusb) {
             board_init_after_tusb();
         }
-
-        // ***
     #endif // USB
 
     gpio_init(LED_PIN);
@@ -241,6 +240,9 @@ int main() {
     #ifdef PRINT
         std::cout << "[DEFINED: PRINT]" << std::endl;
     #endif // PRINT
+    #ifdef EMULATE
+        std::cout << "[DEFINED: EMULATE]" << std::endl;
+    #endif // EMULATE
 
 
     #ifdef DISPLAY
@@ -250,6 +252,17 @@ int main() {
     #endif // DISPLAY
 
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
+
+    #ifdef EMULATE
+        void emulate() {
+            static std::string[12] test = {"2C", "F0", "2C", "24", "F0", "24", "1B", "F0", "1B", "2C", "F0", "2C"}; // test
+            static int test_i = 0;
+            if (test_i == 12) test_i = 0;
+            ps2.press(test[test_i++]);
+        }
+        struct repeating_timer timer;
+        add_repeating_timer_ms(100, emulate(), NULL, &timer);
+    #endif
 
     // Main loop
     while (1) {
@@ -265,15 +278,15 @@ int main() {
                 if (keylist == "F1") {
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LALT);
-                    send_hid_report(REPORT_ID_KEYBOARD, KEY_B);
+                    send_hid_report(REPORT_ID_KEYBOARD, KEY_T);
+                    send_hid_report(REPORT_ID_KEYBOARD, 0);
                 } else if (keylist == "F2") {
-                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0xe2);
-                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0xe2);
+                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0x7f);
+                    send_hid_report(REPORT_ID_CONSUMER_CONTROL, 0);
                 }
 
                 else { // if no macro is defined, press the key instead (note: disable this in future use, as it is a macro keyboard, not a keyboard)
                     send_hid_report(REPORT_ID_KEYBOARD, usb_codes[keylist.c_str()]);
-                    sleep_ms(5);
                     send_hid_report(REPORT_ID_KEYBOARD, 0);
                 }
 

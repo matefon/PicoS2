@@ -107,8 +107,10 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
       if ( btn )
       {
         // volume down
-        uint16_t volume_down = HID_USAGE_CONSUMER_VOLUME_DECREMENT;
-        tud_hid_report(REPORT_ID_CONSUMER_CONTROL, &volume_down, 2);
+        //uint16_t volume_down = HID_USAGE_CONSUMER_VOLUME_DECREMENT;
+        uint16_t button = btn;
+
+        tud_hid_report(REPORT_ID_CONSUMER_CONTROL, &button, 2);
         has_consumer_key = true;
       }else
       {
