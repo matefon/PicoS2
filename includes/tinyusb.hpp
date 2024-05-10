@@ -100,7 +100,7 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
     break;
     */
 
-    case REPORT_ID_CONSUMER_CONTROL:
+    /*case REPORT_ID_CONSUMER_CONTROL:
     {
       // use to avoid send multiple consecutive zero report
       static bool has_consumer_key = false;
@@ -150,7 +150,7 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
       }
     }
     break;
-
+  */
     default: break;
   }
 }

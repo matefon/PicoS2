@@ -188,17 +188,26 @@ void gpio_callback(uint gpio, uint32_t events) {
 
 #ifdef EMULATE
     bool emulate(struct repeating_timer *t) {
-        static std::string test[9] = {"1C", "F0", "1C", "32", "F0", "32", "06", "F0", "06"}; // A, B, F2
+        static std::string test[12] = {"1C", "F0", "1C", "32", "F0", "32", "06", "F0", "06", "05", "F0", "05"}; // A, B, F2, F1 (PS/2 keycodes)
         static int test_i = 0;
-        if (test_i == 9) test_i = 0;
+        if (test_i == 12) test_i = 0;
         ps2.press(test[test_i++]);
         return true;
     }
-#endif
+#endif // EMULATE
 
 int main() {
     stdio_init_all();
     stdio_uart_init_full(uart1, 115200,0,1);
+
+    #ifdef USB
+        board_init(); // Sets up the onboard LED as an output
+        tud_init(BOARD_TUD_RHPORT);
+
+        if (board_init_after_tusb) {
+            board_init_after_tusb();
+        }
+    #endif // USB    
 
     #ifdef DISPLAY
         gpio_init(11); // display power, the vcc pin is used for the ps2 keyboard
@@ -217,15 +226,6 @@ int main() {
         pico_ssd1306::drawText(&display, font_8x8, "keyboard", 0 ,10);
         display.sendBuffer();
     #endif // DISPLAY
-
-    #ifdef USB
-        board_init(); // Sets up the onboard LED as an output
-        tud_init(BOARD_TUD_RHPORT);
-
-        if (board_init_after_tusb) {
-            board_init_after_tusb();
-        }
-    #endif // USB
 
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);    
@@ -265,7 +265,7 @@ int main() {
 
     #ifdef EMULATE
         struct repeating_timer timer;
-        add_repeating_timer_ms(100, emulate, NULL, &timer);
+        add_repeating_timer_ms(200, emulate, NULL, &timer);
     #endif
 
     // Main loop
@@ -280,10 +280,17 @@ int main() {
             std::string keylist = ps2.list();
             #ifdef USB
                 if (keylist == "F1") {
-                    send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
+                    /*send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LCTRL);
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_MOD_LALT);
                     send_hid_report(REPORT_ID_KEYBOARD, KEY_T);
-                    send_hid_report(REPORT_ID_KEYBOARD, 0);
+                    send_hid_report(REPORT_ID_KEYBOARD, 0);*/
+                    uint8_t keycode[6] = { 0 };
+                    keycode[0] = KEY_LEFTCTRL;
+                    keycode[1] = KEY_LEFTALT;
+                    keycode[2] = KEY_T;
+                    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
+                    hid_task();
+                    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
                 } else if (keylist == "F2") {
                     send_hid_report(REPORT_ID_KEYBOARD, 0x7f); // mute
                     send_hid_report(REPORT_ID_KEYBOARD, 0);
