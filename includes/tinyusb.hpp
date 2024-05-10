@@ -90,7 +90,7 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
     }
     break;
 
-    case REPORT_ID_MOUSE:
+    /*case REPORT_ID_MOUSE:
     {
       int8_t const delta = 5;
 
@@ -98,6 +98,7 @@ static void send_hid_report(uint8_t report_id, uint32_t btn)
       tud_hid_mouse_report(REPORT_ID_MOUSE, 0x00, delta, delta, 0, 0);
     }
     break;
+    */
 
     case REPORT_ID_CONSUMER_CONTROL:
     {
