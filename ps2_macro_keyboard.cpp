@@ -254,14 +254,15 @@ int main() {
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
     #ifdef EMULATE
-        void emulate() {
-            static std::string[12] test = {"2C", "F0", "2C", "24", "F0", "24", "1B", "F0", "1B", "2C", "F0", "2C"}; // test
+        bool emulate(struct repeating_timer *t) {
+            static std::string test[12] = {"2C", "F0", "2C", "24", "F0", "24", "1B", "F0", "1B", "2C", "F0", "2C"}; // test
             static int test_i = 0;
             if (test_i == 12) test_i = 0;
             ps2.press(test[test_i++]);
+            return true;
         }
         struct repeating_timer timer;
-        add_repeating_timer_ms(100, emulate(), NULL, &timer);
+        add_repeating_timer_ms(100, emulate, NULL, &timer);
     #endif
 
     // Main loop
