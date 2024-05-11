@@ -8,6 +8,7 @@
 // The key definitions is in usb_hid_keys.h, see the file to add more macros.
 
 /// This is the translation layer. The left hand side is the PS/2 keycode, the right hand side can be changed to program the macro.
+/// By Tinyusb (or USB?) limitations only 6 keys can be pressed at the same time.
 std::unordered_map<std::string, std::vector<uint8_t>> ps2_to_macro = {
     {"ESC", {KEY_ESC}},
     {"F1", {KEY_LEFTCTRL, KEY_LEFTALT, KEY_T}}, // macro

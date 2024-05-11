@@ -14,8 +14,9 @@
 #define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
-//#define INFOKEY "F1" // for future use
+#define SLEEP_DELAY 10 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
 //#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
+//#define INFOKEY "F1" // for future use
 // ************* //
 
 #include <iostream> // for reading, io, basic Pico functions
@@ -94,27 +95,27 @@ public:
 
     std::string list() const {
         std::string keys_string;
-        for (auto it = keys.begin(); it != keys.end(); ++it) {
-            keys_string += *it;
+        for (auto it : keys) {
+            keys_string += it;
         }
         return keys_string;
     }
 
     std::set<std::string> getkeys() const {return keys;}
 
+    // Used by the callback when an unknown key is detected. Some long keycodes (print screen and pause/break) can break the whole code, sometimes crashing the Pico
+    void depress() {
+        keys.clear();
+        rel = false;
+        ext = false;
+        sleep_ms(10);
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const PS2& k);
 
     ~PS2() {}
 
 };
-
-std::ostream& operator<<(std::ostream& os, const PS2& k) {
-    std::set<std::string> temp = k.getkeys();
-    for (auto it = temp.begin(); it != temp.end(); ++it) {
-            os << *it << ", ";
-    }
-    return os;
-}
 
 // Function to convert byte to hexadecimal string with leading zeros
 std::string byte_to_hex(unsigned char byte) {
@@ -125,6 +126,16 @@ std::string byte_to_hex(unsigned char byte) {
 
 std::deque<int> data_bits;
 PS2 ps2;
+
+#ifdef USB
+    void depress() {
+        ps2.depress();
+        tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+        tud_task();
+        hid_task();
+        sleep_ms(10);
+    }
+#endif // USB
 
 void gpio_callback(uint gpio, uint32_t events) {
     static int bit_count = 0;
@@ -171,9 +182,15 @@ void gpio_callback(uint gpio, uint32_t events) {
                     ps2.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
+                    ps2.depress(); // :(
                 }
             } else {
                 std::cout << "Invalid byte received" << std::endl;
+                #ifdef USB
+                    depress();
+                #else
+                    ps2.depress();
+                #endif // USB
             }
 
             // Reset bit count for the next byte
@@ -195,48 +212,51 @@ void gpio_callback(uint gpio, uint32_t events) {
     }
 #endif // EMULATE
 
-/**
- * @brief Using the keyboard_report function from tinyusb to press (and relase) keys.
- * The function takes delay time and keys as arguments. Up to 6 keys can be added, this is a limitation of tinyusb (or USB?)
- * @param delay The amount of time in ms to wait before releasing.
- * @param key0 1st key to be pressed
- * @param key1 2nd key to be pressed
- * @param key2 3rd key to be pressed
- * @param key3 4th key to be pressed
- * @param key4 5th key to be pressed
- * @param key5 6th key to be pressed
- */
-void press(const size_t delay, const std::vector<uint8_t> keycodes) {
-    uint8_t keycode[6] = { 0 };
-    int i = 0;
-    int keycodes_size = keycodes.size();
-    for (auto it : keycodes) {
-        keycode[i++] = it;
-        std::cout << "loop: " << it << std::endl;
-    }
-    std::cout << "press: " << keycode[0] << keycode[1] << std::endl;
-    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
-    hid_task();
-    sleep_ms(delay);
-    tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
-    hid_task();
-}
-
-bool send_macro(const std::set<std::string> keys) {
-    if (keys.size() > 6 || keys.empty())
-        return false;
-    else {
-        for (auto it : keys) {
-            press(5, ps2_to_macro[it]);
-            std::cout << "it: " << it << "begin: " << (uint8_t)ps2_to_macro[it][0] << std::endl;
+#ifdef USB
+    /**
+     * @brief Using the keyboard_report function from tinyusb to press macros. Releasing is handled by send_macro()
+     * The function takes keys as std::vector. Up to 6 keys can be added, this is a limitation of tinyusb (or USB?)
+     * @param keycodes the vector of the keycodes, translated by send_macro
+     */
+    void press(const std::vector<uint8_t> keycodes) {
+        uint8_t keycode[6] = { 0 };
+        int keycodes_size = keycodes.size();
+        for (int i = 0; i < keycodes_size; i++) {
+            keycode[i] = static_cast<uint8_t>(keycodes[i]);
+            #ifdef DEBUG
+                std::cout << "press: " << i << ": " << keycode[i] << std::endl;
+            #endif // DEBUG
+            //send_hid_report(REPORT_ID_KEYBOARD, static_cast<uint8_t>(keycodes[i]));
         }
+        tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
+        hid_task();
+        //send_hid_report(REPORT_ID_KEYBOARD, 0);
+        //tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+        //tud_task();
     }
-    return true;
-}
+
+    bool send_macro(const std::set<std::string> keys) {
+        if (keys.size() > 6 || keys.empty()) {
+            tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+            return false;
+        } else {
+            for (auto it : keys) {
+                #ifdef DEBUG
+                    std::cout << "send macro: " << it << std::endl;
+                #endif // DEBUG
+                press(ps2_to_macro[it]);
+            }
+        }
+        return true;
+    }
+#endif // USB
 
 int main() {
     stdio_init_all();
-    stdio_uart_init_full(uart1, 115200,0,1); // for terminal with USB-TTL adapter
+
+    #ifdef PRINT
+        stdio_uart_init_full(uart1, 115200,0,1); // for terminal with USB-TTL adapter
+    #endif // PRINT
 
     #ifdef USB
         board_init(); // Sets up the onboard LED as an output
@@ -275,22 +295,22 @@ int main() {
     
     sleep_ms(300); // wait a little to get terminal output
 
-    std::cout << "PicoS2 - The PS/2 macro keyboard by matefon" << std::endl;
-    std::cout << "Enabled modules:  (definitions)" << std::endl;
+    std::cout << std::endl << "PicoS2 - The PS/2 macro keyboard by matefon (https://github.com/matefon/PicoS2)" << std::endl;
+    std::cout << "Enabled modules:" << std::endl;
     #ifdef USB
-        std::cout << "[USB] {wait for connection}" << std::endl;
+        std::cout << "- [USB]" << std::endl;
     #endif // USB
     #ifdef DISPLAY
-    std::cout << "[DISPLAY]" << std::endl;
+    std::cout << "- [DISPLAY]" << std::endl;
     #endif // DISPLAY
     #ifdef DEBUG
-        std::cout << "[DEBUG]" << std::endl;
+        std::cout << "- [DEBUG]" << std::endl;
     #endif // DEBUG
     #ifdef PRINT
-        std::cout << "[PRINT]" << std::endl;
+        std::cout << "- [PRINT]" << std::endl;
     #endif // PRINT
     #ifdef EMULATE
-        std::cout << "[EMULATE]" << std::endl;
+        std::cout << "- [EMULATE]" << std::endl;
     #endif // EMULATE
 
     #ifdef DISPLAY
@@ -302,6 +322,7 @@ int main() {
     gpio_set_irq_enabled_with_callback(CLK_PIN, GPIO_IRQ_EDGE_FALL, true, gpio_callback);
 
     #ifdef USB // wait to be initialized
+        std::cout << "[USB] {wait for connection}" << std::endl;
         #ifdef DISPLAY
             display.clear();
             pico_ssd1306::drawText(&display, font_8x8, "[USB]", 0 ,0);
@@ -333,30 +354,32 @@ int main() {
 
     // Main loop
     while (1) {
-        tud_task(); // tinyusb device task
-        led_blinking_task();
-        hid_task();
-        if (!ps2.empty()) {
-            #ifdef PRINT
-                std::cout << ps2 << std::endl;
-            #endif // PRINT
-            std::string keylist = ps2.list();
-            #ifdef USB
-                send_macro(ps2.getkeys());
-            #endif // USB
-            #ifdef DISPLAY
-                display.clear();
-                pico_ssd1306::drawText(&display, font_12x16, keylist.c_str(), 0 ,0);
-                display.sendBuffer();
-            #endif // DISPLAY
-        } 
-        #ifdef DISPLAY
-            else {
-                display.clear();
-                pico_ssd1306::drawText(&display, font_8x8, "[]", 110, 24);
-                display.sendBuffer();
+        #ifdef USB
+            send_macro(ps2.getkeys());
+            tud_task(); // tinyusb device task
+            led_blinking_task();
+            hid_task();
+        #endif // USB
+        #if defined(PRINT) || defined(DISPLAY) // if nothing is sent to the console or display, it is unnecessary to get the keys string
+            if (!ps2.empty()) {
+                std::string keylist = ps2.list();
+                #ifdef PRINT
+                    std::cout << keylist << std::endl;
+                #endif // PRINT
+                #ifdef DISPLAY
+                    display.clear();
+                    pico_ssd1306::drawText(&display, font_12x16, keylist.c_str(), 0 ,0);
+                    display.sendBuffer();
+                #endif // DISPLAY
             }
-        #endif // DISPLAY
-        sleep_ms(100);
+        #endif // PRINT || DISPLAY
+    #ifdef DISPLAY
+        else {
+            display.clear();
+            pico_ssd1306::drawText(&display, font_8x8, "[]", 110, 24);
+            display.sendBuffer();
+        }
+    #endif // DISPLAY
+        sleep_ms(SLEEP_DELAY);
     }
 }
