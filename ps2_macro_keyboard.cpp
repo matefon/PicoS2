@@ -226,13 +226,9 @@ void gpio_callback(uint gpio, uint32_t events) {
             #ifdef DEBUG
                 std::cout << "press: " << i << ": " << keycode[i] << std::endl;
             #endif // DEBUG
-            //send_hid_report(REPORT_ID_KEYBOARD, static_cast<uint8_t>(keycodes[i]));
         }
         tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
         hid_task();
-        //send_hid_report(REPORT_ID_KEYBOARD, 0);
-        //tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
-        //tud_task();
     }
 
     bool send_macro(const std::set<std::string> keys) {
