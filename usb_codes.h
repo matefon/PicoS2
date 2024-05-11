@@ -95,6 +95,7 @@ std::unordered_map<std::string, std::vector<uint8_t>> ps2_to_macro = {
     {"Down Arrow", {KEY_DOWN}},
     {"Right Arrow", {KEY_RIGHT}},
     {"Num Lock", {KEY_NUMLOCK}},
+    {"Keypad /", {KEY_KPSLASH}},
     {"Keypad *", {KEY_KPASTERISK}},
     {"Keypad -", {KEY_KPMINUS}},
     {"Keypad 7", {KEY_KP7}},

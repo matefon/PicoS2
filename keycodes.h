@@ -95,7 +95,7 @@ std::unordered_map<std::string, std::string> keycodes = {
     {"E072", "Down Arrow"},
     {"E074", "Right Arrow"},
     {"77", "Num Lock"},
-    {"E04A", "/"},
+    {"E04A", "Keypad /"},
     {"7C", "Keypad *"},
     {"7B", "Keypad -"},
     {"6C", "Keypad 7"},
