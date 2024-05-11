@@ -104,6 +104,6 @@
 #define PS2_KEYPAD_3 "Keypad 3"
 #define PS2_KEYPAD_0 "Keypad 0"
 #define PS2_KEYPAD_PERIOD "Keypad Period"
-#define PS_KEYPAD_ENTER "Keypad enter"
+#define PS2_KEYPAD_ENTER "Keypad enter"
 
 #endif // NAMES_H
