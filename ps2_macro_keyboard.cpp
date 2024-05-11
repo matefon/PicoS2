@@ -25,7 +25,7 @@
 #define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
-#define SLEEP_DELAY 10 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
+#define SLEEP_DELAY 20 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
 //#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
 //#define INFOKEY "F1" // for future use
 // ************* //
@@ -143,9 +143,8 @@ PS2 ps2;
     void depress() {
         ps2.depress();
         tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
-        tud_task();
         hid_task();
-        sleep_ms(10);
+        std::cout << "[Depress] Done" << std::endl;
     }
 #endif // USB
 
