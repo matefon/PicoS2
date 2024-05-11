@@ -24,5 +24,9 @@ See the wiring folder for more info.
 
 Some info about PS/2 protocol: [hungarian](http://www.vfx.hu/info/atkeyboard.html), [english 1](https://www.avrfreaks.net/sites/default/files/PS2%20Keyboard.pdf), [english 2](https://karooza.net/how-to-interface-a-ps2-keyboard)
 
+### Working keys
+The keys that can be read from the PS/2 keyboard.
+![Working keys](working_keys.png "Working keys")
+
 **I accept any help and suggestions.**
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z51YOFC)

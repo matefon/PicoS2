@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "usb_hid_keys.h"
-// The key definitions is in usb_hid_keys.h, see the file to add more macros.
+// The key definitions is in usb_hid_keys.h, see the file to find more keys.
 
 /// This is the translation layer. The left hand side is the PS/2 keycode, the right hand side can be changed to program the macro.
 /// By Tinyusb (or USB?) limitations only 6 keys can be pressed at the same time.
