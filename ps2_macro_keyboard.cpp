@@ -108,7 +108,6 @@ public:
         keys.clear();
         rel = false;
         ext = false;
-        sleep_ms(10);
     }
 
     friend std::ostream& operator<<(std::ostream& os, const PS2& k);
@@ -128,6 +127,8 @@ std::deque<int> data_bits;
 PS2 ps2;
 
 #ifdef USB
+    /// @brief  :(
+    /// Clears key set and USB codes
     void depress() {
         ps2.depress();
         tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
@@ -182,7 +183,11 @@ void gpio_callback(uint gpio, uint32_t events) {
                     ps2.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
-                    ps2.depress(); // :(
+                    #ifdef USB
+                        depress(); // :(
+                    #else
+                        ps2.depress();
+                    #endif // USB
                 }
             } else {
                 std::cout << "Invalid byte received" << std::endl;
