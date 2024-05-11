@@ -1,12 +1,23 @@
 /**
- * \file irq.cpp
+ * \file ps2_macro_keyboard.cpp
+ * 
+ * PicoS2 - The PS/2 macro keyboard by matefon
+ * https://github.com/matefon/PicoS2
+ * 
  * The main code for reading input from PS/2
  *
  * \par Usage:
- * 1. 
- *
- *
- * made by matefon (assisted by ChatGPT)
+ * -1. Wiring. You need a soldering iron, wire cutter and preferably a PS/2 jack to connect the keyboard. 
+ * 0. Install and set up Pico SDK (add to path!)
+ * 1. clone the repo
+ * 2. change the keyboard macro definitions by editing usb_codes.h (you can remove unnecessary keys by actually removing them from that list) - see example at F1 and F2
+ * 3. edit the CMakeLists.txt (if necessary)
+ * 4. enable/disable modules by editing the macros below
+ * 5. mkdir build, cd build
+ * 6. cmake ..
+ * 7. make
+ * 8. copy the .uf2 file to the Pico (hold bootsel button and plug in)
+ * 9. enjoy.
  */
 
 // *** MACROS *** //
