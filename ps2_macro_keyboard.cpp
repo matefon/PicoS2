@@ -21,7 +21,7 @@
  */
 
 // *** MACROS *** //
-//#define DEBUG // additional prints on the terminal, for debugging use
+#define DEBUG // additional prints on the terminal, for debugging use
 #define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
@@ -53,6 +53,7 @@
 #endif
 
 #include "pico/binary_info.h" // for USB HID
+#include "includes/tusb_config.h"
 #include "tinyusb/hw/bsp/board_api.h"
 #include "tusb.h"
 #include "includes/usb_descriptors.h"
@@ -305,6 +306,15 @@ int main() {
     gpio_pull_up(CLK_PIN); // Pull-up resistor on the clock line
     
     sleep_ms(300); // wait a little to get terminal output
+
+    #ifdef DEBUG
+        #ifdef CFG_TUD_MSC
+            std::cout << "CFG_TUD_MSC" << std::endl;
+        #endif
+        #ifdef CFG_TUD_HID
+            std::cout << "CFG_TUD_HID" << std::endl;
+        #endif
+    #endif //DEBUG
 
     std::cout << std::endl << "PicoS2 - The PS/2 macro keyboard by matefon (https://github.com/matefon/PicoS2)" << std::endl;
     std::cout << "Enabled modules:" << std::endl;

@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
+include_guard(GLOBAL)
 
 set(BOARD pico_sdk)
 set(FAMILY rp2040)
@@ -40,9 +41,9 @@ pico_add_extra_outputs(${PROJECT_NAME})
 
 add_subdirectory(pico-ssd1306 tinyusb/src)
 
-add_definitions(-DUSB_PRODUCT="Pico Keyboard")
+#add_definitions(-DUSB_PRODUCT="Pico Keyboard")
 add_definitions(-DCFG_TUSB_CONFIG_FILE="includes/tusb_config.h")
-add_definitions(-DUSE_TINYUSB)
+#add_definitions(-DUSE_TINYUSB)
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(${PROJECT_NAME} 0)

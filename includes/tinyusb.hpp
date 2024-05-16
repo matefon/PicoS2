@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "bsp/board_api.h"
+#include "../tinyusb/hw/bsp/board_api.h"
+#include "tusb_config.h"
 #include "tusb.h"
 
 #include "usb_descriptors.h"
