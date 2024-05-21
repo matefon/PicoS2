@@ -4,7 +4,8 @@
 ## To build, you need Pico SDK in your path, arm compilers (see CMakeLists.txt) and copy pico_sdk_import.cmake in the folder, next to ps2_macro_keyboard.cpp!
 
 ### Notes
-The USB functionality works. Note: when multiple keys are pressed on the PS/2 keyboard, the display and the terminal is working correctly, but only 1 USB signal is sent. This is not affecting macro functionality, only means that only 1 macro can be sent at a time.
+On Windows, the USB descriptors fail. The hid_composite example works, and I use the same configuration files for this project, and it fails for some reason.
+The USB functionality works (on Linux). Note: when multiple keys are pressed on the PS/2 keyboard, the display and the terminal is working correctly, but only 1 USB signal is sent. This is not affecting macro functionality, only means that only 1 macro can be sent at a time.
 
 ## Building
 ### Wiring. 
