@@ -2,5 +2,5 @@
 	path = pico-ssd1306
 	url = https://github.com/Harbys/pico-ssd1306/
 [submodule "tinyusb"]
-	parh = tinyusb
+	path = tinyusb
 	url = https://github.com/hathach/tinyusb
