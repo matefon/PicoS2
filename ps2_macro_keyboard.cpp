@@ -54,9 +54,10 @@
 #endif
 
 #include "pico/binary_info.h" // for USB HID
-#include "includes/tusb_config.h"
+//#include "includes/tusb_config.h"
+#include "tinyusb/examples/device/hid_composite/src/tusb_config.h"
 #include "tinyusb/hw/bsp/board_api.h"
-#include "tusb.h"
+//#include "tusb.h"
 //#include "includes/usb_descriptors.h"
 #include "tinyusb/examples/device/hid_composite/src/usb_descriptors.h"
 #include "includes/tinyusb.hpp"
