@@ -19,7 +19,8 @@ pico_sdk_init()
 add_executable(${PROJECT_NAME})   
 target_sources(${PROJECT_NAME} PUBLIC
     ps2_macro_keyboard.cpp
-    includes/usb_descriptors.c
+    #includes/usb_descriptors.c
+    tinyusb/examples/device/hid_composite/src/usb_descriptors.c
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR} tinyusb/src)
