@@ -39,6 +39,7 @@
 #include "hardware/gpio.h" // for reading, io, basic Pico functions
 #include "keycodes.h" // for keycodes
 #include "usb_codes.h" // for keycodes
+#include "tinyusb/src/common/tusb_types.h"
 
 #ifndef USB
     #ifndef DISPLAY
@@ -272,7 +273,11 @@ int main() {
 
     #ifdef USB
         board_init(); // Sets up the onboard LED as an output
-        tud_init(BOARD_TUD_RHPORT);
+        tusb_rhport_init_t dev_init = {
+            .role = TUSB_ROLE_DEVICE,
+            .speed = TUSB_SPEED_AUTO
+        };
+        tud_init(BOARD_TUD_RHPORT, &dev_init);
 
         if (board_init_after_tusb) {
             board_init_after_tusb();
