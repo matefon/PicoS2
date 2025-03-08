@@ -57,7 +57,8 @@
 #include "includes/tusb_config.h"
 #include "tinyusb/hw/bsp/board_api.h"
 #include "tusb.h"
-#include "includes/usb_descriptors.h"
+//#include "includes/usb_descriptors.h"
+#include "tinyusb/examples/device/hid_composite/src/usb_descriptors.h"
 #include "includes/tinyusb.hpp"
 #include "usb_hid_keys.h"
 
