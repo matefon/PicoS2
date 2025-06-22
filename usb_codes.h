@@ -10,6 +10,8 @@
 
 /// This is the translation layer. The left hand side is the PS/2 keycode, the right hand side can be changed to program the macro.
 /// By Tinyusb (or USB?) limitations only 6 keys can be pressed at the same time.
+
+/*
 std::unordered_map<std::string, std::vector<uint8_t>> ps2_to_macro = {
     {PS2_ESC, {KEY_ESC}},
     {PS2_F1, {KEY_LEFTCTRL, KEY_LEFTALT, KEY_T}}, // macro
@@ -112,8 +114,9 @@ std::unordered_map<std::string, std::vector<uint8_t>> ps2_to_macro = {
     {PS2_KEYPAD_0, {KEY_KP0}},
     {PS2_KEYPAD_PERIOD, {KEY_KPDOT}}
 };
+*/
 
-
+/*
 /// This map contains the basic translation layer, with corresponding keys. Not for macro use.
 std::unordered_map<std::string, uint8_t> ps2_to_usb = {
     {"76", KEY_ESC},          // ESC
@@ -218,6 +221,7 @@ std::unordered_map<std::string, uint8_t> ps2_to_usb = {
     {"71", KEY_KPDOT},        // Keypad Period
     {"E05A", KEY_KPENTER}     // Keypad enter
 };
+*/
 
 /* obselete: kept for now if needed
 std::unordered_map<std::string, uint8_t> usb_codes = {

@@ -40,6 +40,8 @@ target_sources(${PROJECT_NAME} PUBLIC
     ps2_macro_keyboard.cpp
     includes/usb_descriptors.c
     #tinyusb/examples/device/hid_composite/src/usb_descriptors.c
+    msc_disk.c
+    macro_config.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR} tinyusb/src)
@@ -63,6 +65,8 @@ add_subdirectory(pico-ssd1306 tinyusb/src)
 
 #add_definitions(-DUSB_PRODUCT="Pico Keyboard")
 add_definitions(-DCFG_TUSB_CONFIG_FILE="includes/tusb_config.h")
+add_definitions(-DCFG_TUD_HID=1)
+add_definitions(-DCFG_TUD_MSC=1)
 #add_definitions(-DUSE_TINYUSB)
 
 # enable usb output, disable uart output

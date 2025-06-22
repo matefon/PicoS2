@@ -26,7 +26,7 @@
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
 #define SLEEP_DELAY 20 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
-//#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
+#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
 //#define INFOKEY "F1" // for future use
 // ************* //
 
@@ -60,6 +60,8 @@
 #include "includes/usb_descriptors.h"
 #include "includes/tinyusb.h"
 #include "usb_hid_keys.h"
+
+#include "macro_config.h"
 
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
@@ -253,11 +255,22 @@ void gpio_callback(uint gpio, uint32_t events) {
             tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
             return false;
         } else {
-            for (auto it : keys) {
+            /*for (auto it : keys) {
                 #ifdef DEBUG
                     std::cout << "send macro: " << it << std::endl;
                 #endif // DEBUG
                 press(ps2_to_macro[it]);
+            }*/
+
+            auto macros = parse_macro_file(read_macro_txt_from_fat12());
+            for (const auto& key : keys) {
+                #ifdef DEBUG
+                    std::cout << "send macro: " << key << std::endl;
+                #endif // DEBUG
+                auto macro_it = macros.find(key);
+                if (macro_it != macros.end()) {
+                    press(macro_it->second);
+                }
             }
         }
         return true;
