@@ -1,9 +1,25 @@
+# == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.1.1)
+set(toolchainVersion 14_2_Rel1)
+set(picotoolVersion 2.1.1)
+set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+if (EXISTS ${picoVscode})
+    include(${picoVscode})
+endif()
+# ====================================================================================
+set(PICO_BOARD pico CACHE STRING "Board type")
+
 cmake_minimum_required(VERSION 3.13)
 include_guard(GLOBAL)
 
 set(BOARD pico_sdk)
 set(FAMILY rp2040)
-include(tinyusb/hw/bsp/family_support.cmake pico_sdk_import.cmake)
+include(tinyusb/hw/bsp/family_support.cmake)
 
 project(ps2_macro_keyboard C CXX ASM)
 
@@ -11,16 +27,19 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 # !
-set(CMAKE_C_COMPILER /usr/bin/arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER /usr/bin/arm-none-eabi-g++)
+#set(CMAKE_C_COMPILER /usr/bin/arm-none-eabi-gcc)
+#set(CMAKE_CXX_COMPILER /usr/bin/arm-none-eabi-g++)
+
+set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 
 pico_sdk_init()
 
 add_executable(${PROJECT_NAME})   
 target_sources(${PROJECT_NAME} PUBLIC
     ps2_macro_keyboard.cpp
-    #includes/usb_descriptors.c
-    tinyusb/examples/device/hid_composite/src/usb_descriptors.c
+    includes/usb_descriptors.c
+    #tinyusb/examples/device/hid_composite/src/usb_descriptors.c
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR} tinyusb/src)
