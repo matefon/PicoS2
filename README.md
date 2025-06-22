@@ -23,6 +23,15 @@ See the wiring folder for more info.
 8. copy the .uf2 file to the Pico (hold bootsel button and plug in)
 9. enjoy.
 
+#### On Windows
+0. Install VS Code
+1. Install the Pi Pico SDK
+2. Open "Pico - Visual Studio Code" from the Start menu
+3. Install the "Raspberry Pi Pico" VS Code extension
+4. Import the project, wait for the SDK to install and configure
+5. Navigate to the extension, there you can configure CMake and build the project.
+6. For customizing the macro definitions see step 2 from the previous section.
+
 Some info about PS/2 protocol: [hungarian](http://www.vfx.hu/info/atkeyboard.html), [english 1](https://www.avrfreaks.net/sites/default/files/PS2%20Keyboard.pdf), [english 2](https://karooza.net/how-to-interface-a-ps2-keyboard)
 
 ### Working keys
