@@ -58,9 +58,8 @@
 #include "tinyusb/examples/device/hid_composite/src/tusb_config.h"
 #include "tinyusb/hw/bsp/board_api.h"
 //#include "tusb.h"
-//#include "includes/usb_descriptors.h"
-#include "tinyusb/examples/device/hid_composite/src/usb_descriptors.h"
-#include "includes/tinyusb.hpp"
+#include "includes/usb_descriptors.h"
+#include "includes/tinyusb.h"
 #include "usb_hid_keys.h"
 
 
@@ -247,7 +246,7 @@ void gpio_callback(uint gpio, uint32_t events) {
             #endif // DEBUG
         }
         tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
-        hid_task();
+        //hid_task();
     }
 
     bool send_macro(const std::set<std::string> keys) {
@@ -360,9 +359,10 @@ int main() {
         while (!tud_hid_ready()) {
             tud_task(); 
             led_blinking_task(); 
-            hid_task(); 
-            sleep_ms(100);
+            //hid_task(); 
+            //sleep_ms(100);
         }
+        sleep_ms(100);
         std::cout << "[USB] {connected}" << std::endl;
         #ifdef DISPLAY
             display.clear();
