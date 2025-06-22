@@ -8,6 +8,8 @@
 
 #include "usb_descriptors.h"
 
+extern "C" {
+  
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTYPES
 //--------------------------------------------------------------------+
@@ -261,4 +263,6 @@ void led_blinking_task(void)
 
   board_led_write(led_state);
   led_state = 1 - led_state; // toggle
+}
+
 }
