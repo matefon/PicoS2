@@ -30,8 +30,8 @@ set(CMAKE_CXX_STANDARD 17)
 #set(CMAKE_C_COMPILER /usr/bin/arm-none-eabi-gcc)
 #set(CMAKE_CXX_COMPILER /usr/bin/arm-none-eabi-g++)
 
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
+#set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+#set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 
 pico_sdk_init()
 
