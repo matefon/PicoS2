@@ -25,11 +25,11 @@
  */
 
 // *** MACROS *** //
-#define DEBUG // additional prints on the terminal, for debugging use
+//#define DEBUG // additional prints on the terminal, for debugging use
 #define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
-#define PRINT // enable printing to terminal (less info, than debug, but enough)
-#define SLEEP_DELAY 1 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
+//#define PRINT // enable printing to terminal (less info, than debug, but enough)
+#define SLEEP_DELAY 20 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
 //#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
 //#define INFOKEY "F1" // for future use
 // ************* //
@@ -411,10 +411,10 @@ int main() {
     // Main loop
     while (1) {
         #ifdef USB
-            send_macro(ps2.getkeys());
             tud_task(); // tinyusb device task
             led_blinking_task();
             hid_task();
+            send_macro(ps2.getkeys());
         #endif // USB
         #if defined(PRINT) || defined(DISPLAY) // if nothing is sent to the console or display, it is unnecessary to get the keys string
             if (!ps2.empty()) {
