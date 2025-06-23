@@ -25,7 +25,7 @@
  */
 
 // *** MACROS *** //
-//#define DEBUG // additional prints on the terminal, for debugging use
+#define DEBUG // additional prints on the terminal, for debugging use
 #define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 //#define PRINT // enable printing to terminal (less info, than debug, but enough)
@@ -70,6 +70,43 @@ const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 const uint CLK_PIN = 16;
 const uint DATA_PIN = 17;
 
+#ifdef USB
+    /**
+     * @brief Using the keyboard_report function from tinyusb to press macros. Releasing is handled by send_macro()
+     * The function takes keys as std::vector. Up to 6 keys can be added, this is a limitation of tinyusb (or USB?)
+     * @param keycodes the vector of the keycodes, translated by send_macro
+     */
+    void press(const std::vector<uint8_t> keycodes) {
+        uint8_t keycode[6] = { 0 };
+        int keycodes_size = keycodes.size();
+        for (int i = 0; i < keycodes_size; i++) {
+            keycode[i] = static_cast<uint8_t>(keycodes[i]);
+            #ifdef DEBUG
+                std::cout << "press (" << i << "): " << keycode[i] << std::endl;
+            #endif // DEBUG
+        }
+        tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
+    }
+
+    bool send_macro(const std::set<std::string> keys) {
+        if (keys.size() > 6 || keys.empty()) {
+            tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+            #ifdef DEBUG
+                std::cout << "send macro: empty" << std::endl;
+            #endif // DEBUG
+            return false;
+        } else {
+            for (auto it : keys) {
+                #ifdef DEBUG
+                    std::cout << "send macro: " << it << std::endl;
+                #endif // DEBUG
+                press(ps2_to_macro[it]);
+            }
+        }
+        return true;
+    }
+#endif // USB
+
 class PS2 {
 private:
     std::set<std::string> keys;
@@ -97,12 +134,18 @@ public:
                 std::cout << "[PS2 key] " << key << std::endl;
             #endif // DEBUG
             if (rel) { // remove key
-                release(key);
-                rel = false;
+                //release(key);
+                //rel = false;
+                depress(); // release all keys? it is a macro board, so only 1 key should be pressed at all times
+                send_macro(keys);
             } else {
-                keys.insert(key); // if no release code received, add key
+                if (keys.count(key) == 0){
+                    keys.insert(key); // if no release code received, add key
+                    send_macro(keys);
+                }
             }
         }
+        
     } 
 
     // No return for minimizing memory usage
@@ -203,13 +246,21 @@ void gpio_callback(uint gpio, uint32_t events) {
                 for (int i = 0; i < 8; ++i) {
                     received_byte |= (data_bits[i] << i); // convert the data bits to a byte
                 }
+                
+                #ifdef DEBUG
+                std::cout << std::endl;
+                    for (int x : data_bits) {
+                        std::cout << x << " ";
+                    }
+                    std::cout << " p " << parity << std::endl;
+                #endif // DEBUG
 
                 if (!check_odd_parity(received_byte, parity)) {
                     std::cout << "Parity error" << std::endl;
                     #ifdef USB
-                        depress(); // :(
+                    //    depress();
                     #else
-                        ps2.depress();
+                    //    ps2.depress();
                     #endif // USB
                     bit_count = 0; // Reset bit count for the next byte
                     return;
@@ -220,22 +271,22 @@ void gpio_callback(uint gpio, uint32_t events) {
                 #ifdef DEBUG
                     std::cout << "[CALLBACK hex] " << hex_key << std::endl;  
                 #endif // DEBUG
-                if (keycodes.find(hex_key) != keycodes.end()) {
+                if (keycodes.find(hex_key) != keycodes.end()) { // contains, before C++20
                     ps2.press(hex_key);
                 } else {
                     std::cout << "Unknown key" << std::endl;
                     #ifdef USB
-                        depress(); // :(
+                    //    depress(); // :(
                     #else
-                        ps2.depress();
+                    //    ps2.depress();
                     #endif // USB
                 }
             } else {
                 std::cout << "Invalid byte received" << std::endl;
                 #ifdef USB
-                    depress();
+                //    depress();
                 #else
-                    ps2.depress();
+                //    ps2.depress();
                 #endif // USB
             }
 
@@ -257,40 +308,6 @@ void gpio_callback(uint gpio, uint32_t events) {
         return true;
     }
 #endif // EMULATE
-
-#ifdef USB
-    /**
-     * @brief Using the keyboard_report function from tinyusb to press macros. Releasing is handled by send_macro()
-     * The function takes keys as std::vector. Up to 6 keys can be added, this is a limitation of tinyusb (or USB?)
-     * @param keycodes the vector of the keycodes, translated by send_macro
-     */
-    void press(const std::vector<uint8_t> keycodes) {
-        uint8_t keycode[6] = { 0 };
-        int keycodes_size = keycodes.size();
-        for (int i = 0; i < keycodes_size; i++) {
-            keycode[i] = static_cast<uint8_t>(keycodes[i]);
-            #ifdef DEBUG
-                std::cout << "press: " << i << ": " << keycode[i] << std::endl;
-            #endif // DEBUG
-        }
-        tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
-    }
-
-    bool send_macro(const std::set<std::string> keys) {
-        if (keys.size() > 6 || keys.empty()) {
-            tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
-            return false;
-        } else {
-            for (auto it : keys) {
-                #ifdef DEBUG
-                    std::cout << "send macro: " << it << std::endl;
-                #endif // DEBUG
-                press(ps2_to_macro[it]);
-            }
-        }
-        return true;
-    }
-#endif // USB
 
 int main() {
     stdio_init_all();
@@ -414,7 +431,7 @@ int main() {
             tud_task(); // tinyusb device task
             led_blinking_task();
             hid_task();
-            send_macro(ps2.getkeys());
+            //send_macro(ps2.getkeys());
         #endif // USB
         #if defined(PRINT) || defined(DISPLAY) // if nothing is sent to the console or display, it is unnecessary to get the keys string
             if (!ps2.empty()) {
