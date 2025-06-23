@@ -10,7 +10,8 @@
  * -1. Wiring. You need a soldering iron, wire cutter and preferably a PS/2 jack to connect the keyboard. 
  * 0. Install and set up Pico SDK (add to path!)
  * 1. clone the repo
- * 2. change the keyboard macro definitions by editing usb_codes.h (you can remove unnecessary keys by actually removing them from that list) - see example at F1 and F2
+ * 2. change the keyboard macro definitions by editing usb_codes.h 
+ *    (you can remove unnecessary keys by actually removing them from that list) - see example at F1 and F2
  * 3. edit the CMakeLists.txt (if necessary)
  * 4. enable/disable modules by editing the macros below
  * 5. mkdir build, cd build
@@ -18,6 +19,9 @@
  * 7. make
  * 8. copy the .uf2 file to the Pico (hold bootsel button and plug in)
  * 9. enjoy.
+ * 
+ * With Raspberry Pi Pico extension in VS Code, step 0,5,6,7,8 can be done easier.
+ * See the SDK, extension documentation and the project README
  */
 
 // *** MACROS *** //
@@ -25,7 +29,7 @@
 #define USB // comment this to use screen alone, as the code waits for USB connection to be established
 #define DISPLAY // enable OLED screen
 #define PRINT // enable printing to terminal (less info, than debug, but enough)
-#define SLEEP_DELAY 20 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
+#define SLEEP_DELAY 1 // amount of ms to sleep in the main while loop; too high values result in slow response rate (e.g. key released but not immediately), low values can be too fast (maybe crash?)
 //#define EMULATE // Emulate having a keyboard by sending some keys to the keylist buffer. Useful for testing when no keyboard is connected (when I'm on a train)
 //#define INFOKEY "F1" // for future use
 // ************* //
@@ -39,7 +43,7 @@
 #include "hardware/gpio.h" // for reading, io, basic Pico functions
 #include "keycodes.h" // for keycodes
 #include "usb_codes.h" // for keycodes
-#include "tinyusb/src/common/tusb_types.h"
+#include "usb_hid_keys.h" // for keycodes
 
 #ifndef USB
     #ifndef DISPLAY
@@ -53,13 +57,13 @@
     #include "hardware/i2c.h" // for OLED 128x32 display
 #endif
 
+#include "tinyusb/src/common/tusb_types.h" // for tinyusb macro and enum definitions
+#include "tinyusb/hw/bsp/board_api.h" // needed for tinyusb
 #include "pico/binary_info.h" // for USB HID
-#include "includes/tusb_config.h"
-#include "tinyusb/hw/bsp/board_api.h"
-#include "tusb.h"
-#include "includes/usb_descriptors.h"
-#include "includes/tinyusb.h"
-#include "usb_hid_keys.h"
+#include "tusb.h" // for tinyusb
+#include "includes/tusb_config.h" // tinyusb config for project
+#include "includes/usb_descriptors.h" // tinyusb config for project
+#include "includes/tinyusb.h" // tinyusb helper, modified from the USB HID composite device example
 
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
@@ -150,8 +154,20 @@ PS2 ps2;
     }
 #endif // USB
 
+// Check byte odd parity
+inline bool check_odd_parity(unsigned char byte, int parity_bit) {
+    // XOR all bits of byte together, then XOR with parity_bit
+    byte ^= parity_bit;
+    byte ^= byte >> 4;
+    byte ^= byte >> 2;
+    byte ^= byte >> 1;
+    return byte & 1;
+}
+
+// GPIO interrupt callback for handling PS/2 conversion and adding keys to the keylist
 void gpio_callback(uint gpio, uint32_t events) {
     static int bit_count = 0;
+    static int parity = -1;
     static unsigned char received_byte = 0;
 
     if (gpio == CLK_PIN && events & GPIO_IRQ_EDGE_FALL) {
@@ -160,13 +176,14 @@ void gpio_callback(uint gpio, uint32_t events) {
         // Check for start bit
         if (bit_count == 0 && data_bit == 0) {
             bit_count = 1;
+            parity = -1;
             received_byte = 0;
             data_bits.clear();
             return;
         }
 
         // Store data bits
-        if (bit_count >= 1 && bit_count <= 8) {
+        if (bit_count > 0 && bit_count < 9) {
             data_bits.push_back(data_bit);
             bit_count++;
             return;
@@ -174,16 +191,28 @@ void gpio_callback(uint gpio, uint32_t events) {
 
         // Store parity bit
         if (bit_count == 9) {
+            parity = data_bit;
             bit_count++;
             return;
         }
 
-        // Store stop bit
+        // Check stop bit
         if (bit_count == 10 && data_bit == 1) {
             // Combine the received bits to form a byte
             if (data_bits.size() == 8) {
                 for (int i = 0; i < 8; ++i) {
-                    received_byte |= (data_bits[i] << i);
+                    received_byte |= (data_bits[i] << i); // convert the data bits to a byte
+                }
+
+                if (!check_odd_parity(received_byte, parity)) {
+                    std::cout << "Parity error" << std::endl;
+                    #ifdef USB
+                        depress(); // :(
+                    #else
+                        ps2.depress();
+                    #endif // USB
+                    bit_count = 0; // Reset bit count for the next byte
+                    return;
                 }
 
                 // Print the received key              
@@ -245,7 +274,6 @@ void gpio_callback(uint gpio, uint32_t events) {
             #endif // DEBUG
         }
         tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycode);
-        //hid_task();
     }
 
     bool send_macro(const std::set<std::string> keys) {
@@ -355,12 +383,13 @@ int main() {
             pico_ssd1306::drawText(&display, font_8x8, "connecting...", 0 ,10);
             display.sendBuffer();
         #endif // DISPLAY
+
+        // wait for USB connection (usually pretty fast)
         while (!tud_hid_ready()) {
             tud_task(); 
             led_blinking_task(); 
-            //hid_task(); 
-            //sleep_ms(100);
         }
+
         sleep_ms(100);
         std::cout << "[USB] {connected}" << std::endl;
         #ifdef DISPLAY
